@@ -24,3 +24,6 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.oomph.setup.ui 1 0 2019-09-12 16:37:52.362
 !MESSAGE Setup tasks were performed during startup updating 5 preferences. See 'C:\Users\Andrew\eclipse\cpp-2019-06\eclipse\configuration\org.eclipse.oomph.setup\setup.log' for details
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-09-12 16:38:34.107
+!MESSAGE Indexed 'Classwork' (1 sources, 0 headers) in 0.116 sec: 1 declarations; 0 references; 1 unresolved inclusions; 0 syntax errors; 3 unresolved names (75%)
