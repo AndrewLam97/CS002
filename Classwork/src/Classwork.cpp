@@ -1,9 +1,7 @@
 //============================================================================
 // Name        : Classwork.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Author      : Andrew Lam
+// Description : Ask the user for their age and prints a statement
 //============================================================================
 
 #include <iostream>
