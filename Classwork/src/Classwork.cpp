@@ -6,11 +6,24 @@
 
 #include <iostream>
 using namespace std;
+#include <sstream>
 
 int main() {
-	int age = 0;
-	cout << "What's your age?" << endl;
-	cin >> age;
-	cout << "You are " << age << " years old. \n";
+	string entryStr = "";
+	int result = 0;
+	int addNum = 0;
+	do
+	{
+		cout << "Enter a number or Done: \n";
+		cin >> entryStr;
+		stringstream entryNum(entryStr);
+		entryNum >> addNum;
+		result += addNum;
+	} while(entryStr != "Done");
+
+	cout << "Your final sum is: " << result << ". \n";
+
+	system("PAUSE");
+
 	return 0;
 }
