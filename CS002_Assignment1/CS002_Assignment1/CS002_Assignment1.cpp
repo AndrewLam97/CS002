@@ -13,7 +13,7 @@
 	using namespace std;
 
 	int passengerOn = 0, passengerOff = 0, passengerTotal = 0, stopCounter = 0;
-	char continueVar;
+	char continueVar = ' ';
 
 	int getOn()
 	{
