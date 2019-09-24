@@ -1,53 +1,62 @@
 /* CS002_Assignment2
  * Andrew Lam
  * Purpose: High/Low Guessing Game
- * Constraints: 10 guesses, use switch
+ * Constraints: 10 guesses
  */
 
 #include <iostream>
 using namespace std;
 #include <ctime>
 
-int * randNumsGen()
+int* randNumsGen(int actualVal)
 {
-	srand((unsigned)time(NULL));
-
-	int range = 10 + rand() % 10;
 	static int randNums[3];
-	int actualVal = rand() % 100;
-
-	randNums[0] = actualVal - range;
+	//introduce pseudo-random variance to expand range around given value
+	randNums[0] = actualVal - (rand() % 15) - (rand() % 17);
 	randNums[1] = actualVal;
-	randNums[2] = actualVal + range;
+	randNums[2] = actualVal + (rand() % 15) + (rand() % 17);
 
-	for (int i = 0; i < 3; i++) {
-		cout << randNums[i] << endl;
-	}
 	return randNums;
 }
 
-char evalEntry(int entry, int actualVal)
+bool evalEntry(int entry, int actualVal)
 {
 	if (entry == actualVal)
 	{
-		return 'w';
+		cout << endl << "You got the correct answer!" << endl;
+		return true;
 	}
 	else if (entry > actualVal)
 	{
-		return 'h';
+		cout << endl << "Your guess is too high, guess lower." << endl;
+		return false;
 	}
 	else
 	{
-		return 'l';
+		cout << endl << "Your guess is too low, guess higher." << endl;
+		return false;
 	}
-}
-
-void highOrLow()
-{
-
 }
 
 int main()
 {
-	randNumsGen();
+	int entry = 0, guesses = 10;
+	srand((unsigned)time(NULL)); // set seed for rand
+	int actualVal = rand() % 100; //set computer's value
+
+	int* lowAndHigh = randNumsGen(actualVal);
+	/*for (int i = 0; i < 3; i++) {
+		cout << lowAndHigh[i] << endl;
+	}*/
+
+	do
+	{
+		cout << endl << "Guess the number between the range " << lowAndHigh[0] << " and " << lowAndHigh[2] << "." << endl;
+		cin >> entry;
+		guesses--;
+		if (guesses == 0) {
+			cout << endl << "You ran out of guesses :(" << endl;
+			break;
+		}
+	} while ((evalEntry(entry, actualVal) == false) && (guesses != 0));
 }
