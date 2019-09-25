@@ -1,6 +1,6 @@
 // CS002_IfSwitch.cpp
 // Andrew Lam
-//
+// 9-23-19
 
 #include <iostream>
 using namespace std;
@@ -31,12 +31,17 @@ int main()
 			break;
 		}
 	}
+	/*
 	cout << endl << "There are " << nonUnder << " non-binary individuals 20 and under.";
 	cout << endl << "There are " << nonOver << " non-binary individuals 21 and over.";
 	cout << endl << "There are " << femaleUnder << " females 20 and under.";
 	cout << endl << "There are " << femaleOver << " females 21 and over.";
-	cout << endl << "There are " << maleUnder << " males 20 and under.";
+	cout << endl << "There are " << maleUnder << " males 20 and under.";	
 	cout << endl << "There are " << maleOver << " males 21 and over.";
+	*/
 
+	cout << endl << "You have entered " << nonUnder << " non-binary individuals 20 and under and " << nonOver << " non-binary individuals 21 and over.";
+	cout << endl << "You have entered " << femaleUnder << " females 20 and under and " << femaleOver << " females 21 and over.";
+	cout << endl << "You have entered " << maleUnder << " males 20 and under and " << maleOver << " males 21 and over.";
 
 }
