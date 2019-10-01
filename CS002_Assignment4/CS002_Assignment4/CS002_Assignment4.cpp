@@ -5,8 +5,6 @@
 	PURPOSE: Blackjack
 */
 
-
-
 #include <iostream>
 #include <vector>
 #include <random>
