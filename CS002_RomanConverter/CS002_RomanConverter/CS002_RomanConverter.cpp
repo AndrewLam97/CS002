@@ -1,10 +1,15 @@
-// CS002_RomanConverter.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// CS002_RomanConverter.cpp
+// Andrew Lam
 
 #include <iostream>
 #include <string>
 using namespace std;
 
+/*
+PURPOSE: convert certain integers to roman numeral
+PARAMETERS: int x
+RETURN VALUES: string of equivalent roman numeral
+*/
 string romanConvert(int x)
 {
 	if (x == 1)
@@ -35,17 +40,11 @@ string romanConvert(int x)
 		return "M";
 }
 
-string modToString(string place, int value)
-{
-	return 0;
-}
-
 int main()
 {
-	while (true)
+	while (true) //repeat converting until done
 	{
 		string entry;
-		string result = "";
 
 		cout << "Enter Arabic numeral or done: ";
 		cin >> entry;
@@ -56,15 +55,15 @@ int main()
 
 		int entryNum = stoi(entry);
 
-		while (entryNum > 0)
+		while (entryNum > 0)//repeat integer division and subtraction for each numerical place until number is reduced to 0
 		{
-			for (int thousands = entryNum / 1000; thousands > 0; thousands--)
+			for (int thousands = entryNum / 1000; thousands > 0; thousands--) //handles thousands place
 			{
 				cout << romanConvert(1000);
 				entryNum -= 1000;
 			}
 
-			int hundreds = entryNum / 100;
+			int hundreds = entryNum / 100; //100s place
 			entryNum -= hundreds * 100;
 			do
 			{
@@ -91,7 +90,7 @@ int main()
 				else break;
 			}while(hundreds > 0);
 
-			int tens = entryNum / 10;
+			int tens = entryNum / 10; //tens place
 			entryNum -= tens * 10;
 			do
 			{
@@ -118,7 +117,7 @@ int main()
 				else break;
 			} while (tens > 0);
 
-			int ones = entryNum / 1;
+			int ones = entryNum / 1; //ones place
 			entryNum -= ones;
 			do
 			{
