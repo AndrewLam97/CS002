@@ -5,6 +5,14 @@
 #include <string>
 using namespace std;
 
+struct Number
+{
+	int thousands;
+	int hundreds;
+	int tens;
+	int ones;
+};
+
 /*
 PURPOSE: convert certain integers to roman numeral
 PARAMETERS: int x
@@ -40,9 +48,100 @@ string romanConvert(int x)
 		return "M";
 }
 
+/*
+PURPOSE: prints roman numeral from struct Number using romanConvert
+PARAMETERS: struct Number entryNumber
+RETURN VALUES: cout equivalent roman numeral
+*/
+void romanPrinter(Number& entryNumber)
+{
+	int tempMulti = 1;
+	for (entryNumber.thousands; entryNumber.thousands > 0; entryNumber.thousands--) //handles thousands place
+	{
+		cout << romanConvert(1000);
+	}
+
+	do //handles hundreds place, prints value and decrements by printed amount
+	{
+		tempMulti = 100;
+		if (entryNumber.hundreds == 9)
+		{
+			cout << romanConvert(entryNumber.hundreds * tempMulti);
+			entryNumber.hundreds -= 9;
+		}
+		else if (entryNumber.hundreds >= 5)
+		{
+			cout << romanConvert(5 * tempMulti);
+			entryNumber.hundreds -= 5;
+		}
+		else if (entryNumber.hundreds == 4)
+		{
+			cout << romanConvert(entryNumber.hundreds * tempMulti);
+			entryNumber.hundreds -= 4;
+		}
+		else if (entryNumber.hundreds < 4 && entryNumber.hundreds > 0)
+		{
+			cout << romanConvert(tempMulti);
+			entryNumber.hundreds -= 1;
+		}
+		else break;
+	} while (entryNumber.hundreds > 0);
+
+	do //handles tens place, prints value and decrements by printed amount
+	{
+		tempMulti = 10;
+		if (entryNumber.tens == 9)
+		{
+			cout << romanConvert(entryNumber.tens * tempMulti);
+			entryNumber.tens -= 9;
+		}
+		else if (entryNumber.tens >= 5)
+		{
+			cout << romanConvert(5 * tempMulti);
+			entryNumber.tens -= 5;
+		}
+		else if (entryNumber.tens == 4)
+		{
+			cout << romanConvert(entryNumber.tens * tempMulti);
+			entryNumber.tens -= 4;
+		}
+		else if (entryNumber.tens < 4 && entryNumber.tens > 0)
+		{
+			cout << romanConvert(tempMulti);
+			entryNumber.tens -= 1;
+		}
+		else break;
+	} while (entryNumber.tens > 0);
+
+	do //handles ones place, prints value and decrements by printed amount
+	{
+		if (entryNumber.ones == 9)
+		{
+			cout << romanConvert(entryNumber.ones);
+			entryNumber.ones -= 9;
+		}
+		else if (entryNumber.ones >= 5)
+		{
+			cout << romanConvert(5);
+			entryNumber.ones -= 5;
+		}
+		else if (entryNumber.ones == 4)
+		{
+			cout << romanConvert(entryNumber.ones);
+			entryNumber.ones -= 4;
+		}
+		else if (entryNumber.ones < 4 && entryNumber.ones > 0)
+		{
+			cout << romanConvert(1);
+			entryNumber.ones -= 1;
+		}
+		else break;
+	} while (entryNumber.ones > 0);
+}
+
 int main()
 {
-	while (true) //repeat converting until done
+	while (true) //repeat converting until entry string = done
 	{
 		string entry;
 
@@ -55,95 +154,13 @@ int main()
 
 		int entryNum = stoi(entry);
 
-		while (entryNum > 0)//repeat integer division and subtraction for each numerical place until number is reduced to 0
-		{
-			for (int thousands = entryNum / 1000; thousands > 0; thousands--) //handles thousands place
-			{
-				cout << romanConvert(1000);
-				entryNum -= 1000;
-			}
+		Number entryNumber; //constructs struct Number containing place values
+		entryNumber.thousands = entryNum / 1000;
+		entryNumber.hundreds = (entryNum / 100) % 10;
+		entryNumber.tens = (entryNum % 100) / 10;
+		entryNumber.ones = entryNum % 10;
 
-			int hundreds = entryNum / 100; //100s place
-			entryNum -= hundreds * 100;
-			do
-			{
-				if (hundreds == 9)
-				{
-					cout << romanConvert(900);
-					hundreds -= 9;
-				}
-				else if (hundreds >= 5)
-				{
-					cout << romanConvert(500);
-					hundreds -= 5;
-				}
-				else if (hundreds == 4)
-				{
-					cout << romanConvert(400);
-					hundreds -= 4;
-				}
-				else if (hundreds < 4 && hundreds > 0)
-				{
-					cout << romanConvert(100);
-					hundreds -= 1;
-				}
-				else break;
-			}while(hundreds > 0);
-
-			int tens = entryNum / 10; //tens place
-			entryNum -= tens * 10;
-			do
-			{
-				if (tens == 9)
-				{
-					cout << romanConvert(90);
-					tens -= 9;
-				}
-				else if (tens >= 5)
-				{
-					cout << romanConvert(50);
-					tens -= 5;
-				}
-				else if (tens == 4)
-				{
-					cout << romanConvert(40);
-					tens -= 4;
-				}
-				else if (tens < 4 && tens > 0)
-				{
-					cout << romanConvert(10);
-					tens -= 1;
-				}
-				else break;
-			} while (tens > 0);
-
-			int ones = entryNum / 1; //ones place
-			entryNum -= ones;
-			do
-			{
-				if (ones == 9)
-				{
-					cout << romanConvert(9);
-					ones -= 9;
-				}
-				else if (ones >= 5)
-				{
-					cout << romanConvert(5);
-					ones -= 5;
-				}
-				else if (ones == 4)
-				{
-					cout << romanConvert(4);
-					ones -= 4;
-				}
-				else if (ones < 4 && ones > 0)
-				{
-					cout << romanConvert(1);
-					ones -= 1;
-				}
-				else break;
-			} while (ones > 0);
-		}
+		romanPrinter(entryNumber);
 		cout << endl;
 	}
 }
