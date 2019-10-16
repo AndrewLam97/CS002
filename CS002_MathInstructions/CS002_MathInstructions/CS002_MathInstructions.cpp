@@ -13,18 +13,19 @@ using namespace std;
 char sign = '+';
 
 struct Number {
+	int thousands;
 	int hundreds;
 	int tens;
 	int ones;
 };
 
 Number getNumber(int n);
-void addOnes(Number num, Number num2, Number& numTotal, int& carry1, int& carry2);
-void addTens(Number num, Number num2, Number& numTotal, int& carry1, int& carry2);
-
+void addOnes(Number num1, Number num2, Number& numTotal, int& carry1);
+void addTens(Number num1, Number num2, Number& numTotal, int& carry1, int& carry2);
+void addHundreds(Number num1, Number num2, Number& numTotal, int& carry1, int& carry2);
 
 void printCarry(int carry1, int carry2);
-void printEquation(Number num1, Number num2, Number numTotal);
+void printEquation(Number num1, Number num2);
 void printTotal(Number numTotal, int i);
 
 void printInstructions(int intNum1, int intNum2);
@@ -45,16 +46,23 @@ int main()
 		switch (i)
 		{
 		case 1:
-			addOnes(num1, num2, numTotal, carry1, carry2);
+			addOnes(num1, num2, numTotal, carry1);
 			printCarry(carry1, carry2);
-			printEquation(num1, num2, numTotal);
+			printEquation(num1, num2);
 			printTotal(numTotal, i);
 			break;
 		case 10:
 			addTens(num1, num2, numTotal, carry1, carry2);
 			printCarry(carry1, carry2);
-			printEquation(num1, num2, numTotal);
+			printEquation(num1, num2);
 			printTotal(numTotal, i);
+			break;
+		case 100:
+			addHundreds(num1, num2, numTotal, carry1, carry2);
+			printCarry(carry1, carry2);
+			printEquation(num1, num2);
+			printTotal(numTotal, i);
+			break;
 		}
 	}
 }
@@ -65,11 +73,12 @@ Number getNumber(int n)
 	num.ones = n % 10;
 	num.tens = (n / 10) % 10;
 	num.hundreds = n / 100;
+	num.thousands = 0;
 
 	return num;
 }
 
-void addOnes(Number num1, Number num2, Number& numTotal, int& carry1, int& carry2)
+void addOnes(Number num1, Number num2, Number& numTotal, int& carry1)
 {
 	int total = num1.ones + num2.ones;
 	if (total >= 10)
@@ -93,6 +102,24 @@ void addTens(Number num1, Number num2, Number& numTotal, int& carry1, int& carry
 	numTotal.tens = total % 10;
 }
 
+void addHundreds(Number num1, Number num2, Number& numTotal, int& carry1, int& carry2)
+{
+	int total = num1.hundreds + num2.hundreds;
+	if (carry2 == 1)
+	{
+		total++;
+	}
+	if (total >= 10)
+	{
+		numTotal.thousands = total / 10;
+	}
+	else
+	{
+		numTotal.thousands = 0;
+	}
+	numTotal.hundreds = total % 10;
+}
+
 void printCarry(int carry1, int carry2)
 {
 	if (carry2 != 0 && carry1 == 0)
@@ -109,7 +136,7 @@ void printCarry(int carry1, int carry2)
 	}
 }
 
-void printEquation(Number num1, Number num2, Number numTotal)
+void printEquation(Number num1, Number num2)
 {
 	cout << setw(3) << num1.hundreds << " " << num1.tens << " " << num1.ones << endl;
 	cout << sign << " " << num2.hundreds << " " << num2.tens << " " << num2.ones << endl;
@@ -121,12 +148,19 @@ void printTotal(Number numTotal, int place)
 	switch (place)
 	{
 	case 1:
-		cout << setw(7) << numTotal.ones << endl;
+		cout << setw(7) << numTotal.ones << endl << endl;
 		break;
 	case 10:
-		cout << setw(5) << numTotal.tens << setw(2) << numTotal.ones << endl;
+		cout << setw(5) << numTotal.tens << setw(2) << numTotal.ones << endl << endl;
 		break;
 	case 100:
-		cout << setw(3) << numTotal.hundreds << setw(2) << numTotal.tens << setw(2) << numTotal.ones << endl;
+		if (numTotal.thousands != 0)
+		{
+			cout << numTotal.thousands << " " << numTotal.hundreds << setw(2) << numTotal.tens << setw(2) << numTotal.ones << endl << endl;
+		}
+		else
+		{
+			cout << setw(3) << numTotal.hundreds << setw(2) << numTotal.tens << setw(2) << numTotal.ones << endl << endl;
+		}
 	}
 }
