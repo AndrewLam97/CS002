@@ -1,14 +1,8 @@
 /*
 CS002_Puzzlevania.cpp
-
-Hit Chance:
-Aaron = 1/3
-Bob = 1/2
-Charlie = 1
-
-Order:
-Aaron - Bob - Charlie
-
+DUE: 10/15/19
+PURPOSE: Truel problem, three duelists with hit accuracies of 33%, 50%, 100%. Every individual shoots at the person alive with the most accuracy.
+	Last man standing wins.
 */
 
 #include <iostream>
@@ -32,8 +26,8 @@ int main()
 	cout << "Enter 1 for normal duel, 2 for alt duel: " << endl;
 	cin >> entry;
 	
-	if (entry == 1) {
-		for (int i = 0; i < 100000; i++)
+	if (entry == 1) { 
+		for (int i = 0; i < 100000; i++) //100000 duels, count winners
 		{
 			switch (startDuel())
 			{
@@ -72,26 +66,36 @@ int main()
 	cout << "Charlie won: " << cCount << " times." << endl;
 }
 
+/*
+PURPOSE: simulates a singular shot, shoots at targetAlive with given accuracy and uses a random number to determine if target is hit
+PARAMETERS: bool targetAlive with the current value of target, double accuracy containing shooter's hit percentage
+RETURN VALUES: none, targetAlive passed by reference and modified in function
+*/
 void shoot(bool& targetAlive, double accuracy)
-{
-	random_device device;
+{   //generate random number between 0 and 1
+	random_device device; 
 	mt19937 generator(device());
-	uniform_real_distribution<double> dis(0.0, 1.0);
+	uniform_real_distribution<double> dis(0.0, 1.0); 
 	double rand = dis(generator);
 
-	if (targetAlive == true && rand < accuracy)
+	if (targetAlive == true && rand < accuracy) //target hit given random number less than accuracy
 	{
 		targetAlive = false;
 	}
 }
 
+/*
+PURPOSE: Starts a duel with each person shooting at the person with the highest accuracy that's alive.
+PARAMETERS: none
+RETURN VALUES: char representing winner
+*/
 char startDuel()
 {
-	bool Aaron = true, Bob = true, Charlie = true;
+	bool Aaron = true, Bob = true, Charlie = true; //all individuals alive
 
-	shoot(Charlie, aaronAcc);
+	shoot(Charlie, aaronAcc); //first shot set
 
-	if (Charlie)
+	if (Charlie) //start Charlie alive branch
 	{
 		shoot(Charlie, bobAcc);
 
@@ -101,12 +105,12 @@ char startDuel()
 			shoot(Charlie, aaronAcc);
 			if (Charlie)
 			{
-				shoot(Aaron, charlieAcc);
+				shoot(Aaron, charlieAcc); //end of Charlie alive path
 			}
 		}
-		else
+		else //Charlie killed by Bob path
 		{
-			while (Aaron && Bob)
+			while (Aaron && Bob) //Aaron and Bob duel until one dies
 			{
 				shoot(Bob, aaronAcc);
 				if (Bob == false)
@@ -121,9 +125,9 @@ char startDuel()
 			}
 		}
 	}
-	else
+	else //Charlie killed by Aaron path
 	{
-		while (Aaron && Bob)
+		while (Aaron && Bob) //Aaron and Bob duel until one dies
 		{
 			shoot(Aaron, bobAcc);
 			if (Aaron == false)
@@ -152,13 +156,18 @@ char startDuel()
 	}
 }
 
+/*
+PURPOSE: Starts a duel with each person shooting at the person with the highest accuracy that's alive. However, Aaron intentionally misses his first shot
+PARAMETERS: none
+RETURN VALUES: char representing winner
+*/
 char startAltDuel()
 {
 	bool Aaron = true, Bob = true, Charlie = true;
 
-	shoot(Charlie, 0);
+	shoot(Charlie, 0); //Aaron intentionally misses
 
-	if (Charlie)
+	if (Charlie) //start Charlie alive branch
 	{
 		shoot(Charlie, bobAcc);
 
@@ -168,10 +177,10 @@ char startAltDuel()
 			shoot(Charlie, aaronAcc);
 			if (Charlie)
 			{
-				shoot(Aaron, charlieAcc);
+				shoot(Aaron, charlieAcc); //end Charlie alive path
 			}
 		}
-		else
+		else //Charlie killed by Bob
 		{
 			while (Aaron && Bob)
 			{
@@ -188,7 +197,7 @@ char startAltDuel()
 			}
 		}
 	}
-	else
+	else //Charlie killed by Aaron
 	{
 		while (Aaron && Bob)
 		{
