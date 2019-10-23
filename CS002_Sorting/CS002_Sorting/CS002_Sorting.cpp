@@ -115,7 +115,7 @@ RETURN VALUES: none, outputs to console
 void testFnc(int array[], int size)
 {
 	//test selection sort
-	cout << "Testing Selection Sort";
+	cout << "Testing Selection Sort...";
 	fillArray(array, size);
 	cout << endl << "Unsorted array: " << endl;
 	printArray(array, size);
