@@ -89,6 +89,11 @@ void swap(int array[], int pos1, int pos2)
 	array[pos2] = temp; //replace integer at pos2 with saved pos1 
 }
 
+/*
+PURPOSE: shifts an integer array to the right starting at index
+PARAMETERS: integer array and integer index
+RETURN VALUES: none, array modified in place
+*/
 void shiftRight(int array[], int index)
 {
 	for (int i = index + 1; i < MAX_SIZE; i++)
