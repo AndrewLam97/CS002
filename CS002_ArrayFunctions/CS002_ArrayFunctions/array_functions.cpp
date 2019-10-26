@@ -50,6 +50,11 @@ void printArray(int array[])
 	cout << "]";
 }
 
+/*
+PURPOSE: Appends an integer value to an integer array at index capacity
+PARAMETERS: integer array, integer capacity by reference, integer value
+RETURN VALUES: none, array modified in place
+*/
 void appendArray(int array[], int& capacity, int value)
 {
 	if (capacity < MAX_SIZE)
@@ -59,6 +64,11 @@ void appendArray(int array[], int& capacity, int value)
 	//for (int i = 0; i < MAX_SIZE; i++)
 }
 
+/*
+PURPOSE: Copies contents of first array to second array
+PARAMETERS: first and second integer array
+RETURN VALUES: none, modified in place
+*/
 void copyArray(int array[], int array2[])
 {
 	for (int i = 0; i < MAX_SIZE; i++)

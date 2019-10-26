@@ -38,6 +38,7 @@ void testFnc(int arr[])
 
 	appendArray(arr, capacity, 1);
 	printArray(arr);
+	cout << endl;
 
 	//test selection sort
 	cout << "Testing Selection Sort...";
