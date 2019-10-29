@@ -4,13 +4,14 @@
 using namespace std;
 
 const int MAX_SIZE = 5;
+typedef int ARRAY_TYPE;
 
 /*
 PURPOSE: Fills an array with random integers ranging from 1 to 100
 PARAMETERS: integer array, array size
 RETURN VALUES: none, array modified in place
 */
-void fillArrayRand(int array[])
+void fillArrayRand(ARRAY_TYPE array[])
 {
 	for (int i = 0; i < MAX_SIZE; i++) //fills each index in array with random int
 	{
@@ -27,7 +28,7 @@ PURPOSE: Fills an array with the same integer
 PARAMETERS: integer array, array size, desired value
 RETURN VALUES: none, array modified in place
 */
-void fillArrayCons(int array[], int value)
+void fillArrayCons(ARRAY_TYPE array[], int value)
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -40,14 +41,14 @@ PURPOSE: Prints an array to console
 PARAMETERS: integer array, size of array
 RETURN VALUES: none, outputs to console
 */
-void printArray(int array[])
+void printArray(ARRAY_TYPE array[])
 {
 	cout << "[ ";
 	for (int i = 0; i < MAX_SIZE; i++) //iterate through array
 	{
 		cout << array[i] << " "; //print integer at current index
 	}
-	cout << "]";
+	cout << "]" << endl;
 }
 
 /*
@@ -55,7 +56,7 @@ PURPOSE: Appends an integer value to an integer array at index capacity
 PARAMETERS: integer array, integer capacity by reference, integer value
 RETURN VALUES: none, array modified in place
 */
-void appendArray(int array[], int& capacity, int value)
+void appendArray(ARRAY_TYPE array[], int& capacity, int value)
 {
 	if (capacity < MAX_SIZE)
 	{
@@ -69,7 +70,7 @@ PURPOSE: Copies contents of first array to second array
 PARAMETERS: first and second integer array
 RETURN VALUES: none, modified in place
 */
-void copyArray(int array[], int array2[])
+void copyArray(ARRAY_TYPE array[], int array2[])
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -78,15 +79,40 @@ void copyArray(int array[], int array2[])
 }
 
 /*
+PURPOSE: Searches an integer array for an integer value and returns the index of that value
+PARAMETERS: integer array,  integer desired search value
+RETURN VALUES: integer index of searched value
+*/
+int search(ARRAY_TYPE array[], int value)
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		if(array[i] == value)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+/*
 PURPOSE: Swaps two elements in an array
 PARAMETERS: integer array, indexes of 2 elements to be swapped
 RETURN VALUES: none, swaps performed in place
 */
-void swap(int array[], int pos1, int pos2)
+void swap(ARRAY_TYPE array[], int pos1, int pos2)
 {
 	int temp = array[pos1]; //save integer at pos1
 	array[pos1] = array[pos2]; //swap integer at pos2 to pos1
 	array[pos2] = temp; //replace integer at pos2 with saved pos1 
+}
+
+void shiftLeft(ARRAY_TYPE array[], int index)
+{
+	for (int i = index - 1; i >= 0; i--)
+	{
+		swap(array, index, i);
+	}
 }
 
 /*
@@ -94,7 +120,7 @@ PURPOSE: shifts an integer array to the right starting at index
 PARAMETERS: integer array and integer index
 RETURN VALUES: none, array modified in place
 */
-void shiftRight(int array[], int index)
+void shiftRight(ARRAY_TYPE array[], int index)
 {
 	for (int i = index + 1; i < MAX_SIZE; i++)
 	{
@@ -107,7 +133,7 @@ PURPOSE: sorts an array of integers using selection sort
 PARAMETERS: integer array and size of array
 RETURN VALUES: none, swaps performed in place
 */
-void selectionSort(int array[])
+void selectionSort(ARRAY_TYPE array[])
 {
 	int lowestPos;
 	for (int i = 0; i < MAX_SIZE - 1; i++) //iterate starting point
@@ -129,7 +155,7 @@ PURPOSE: sorts an array of integers using bubble sort
 PARAMETERS: integer array and size of array
 RETURN VALUES: none, swaps performed in place
 */
-void bubbleSort(int array[])
+void bubbleSort(ARRAY_TYPE array[])
 {
 	bool swapped = true; //swapped flag
 	for (int i = 0; i < MAX_SIZE - 1 && swapped; i++) //iterate through array until maximum swaps (n^2) reached or no swaps performed amongst 1 pass
