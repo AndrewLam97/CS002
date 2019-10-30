@@ -2,7 +2,7 @@
 #include "test.h"
 using namespace std;
 
-const int MAX_SIZE = 5;
+const int MAX_SIZE = 10;
 typedef int ARRAY_TYPE;
 
 int main()

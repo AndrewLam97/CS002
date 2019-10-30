@@ -1,7 +1,6 @@
 #pragma once
 typedef int ARRAY_TYPE;
 
-
 void fillArrayRand(ARRAY_TYPE array[]);  //fills each element in the array with random integers
 void fillArrayCons(ARRAY_TYPE array[], int value); //fills each element in the array with value
 void printArray(ARRAY_TYPE array[]); //print all indexed variables in my array

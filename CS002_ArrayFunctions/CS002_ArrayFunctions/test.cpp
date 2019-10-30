@@ -6,16 +6,30 @@ using namespace std;
 extern const int MAX_SIZE;
 typedef int ARRAY_TYPE;
 
-/*void test_fill()
+//void test_print()
+
+void test_fillArrayCons(ARRAY_TYPE arr[])
 {
-	cout << "Test fnc";
+	cout << "Testing constant fill..." << endl;
+	cout << "Original array: " << endl;
+	printArray(arr);
+	int value = 7;
+	fillArrayCons(arr, value);
+	cout << "Filled array with " << value << endl;
+	printArray(arr);
+	cout << endl;
 }
 
-void test_print()
+void test_fillArrayRand(ARRAY_TYPE arr[])
 {
-
+	cout << "Testing random fill..." << endl;
+	cout << "Original array: " << endl;
+	printArray(arr);
+	fillArrayRand(arr);
+	cout << "Filled array with random values" << endl;
+	printArray(arr);
+	cout << endl;
 }
-*/
 
 void test_append(ARRAY_TYPE arr[])
 {
@@ -24,8 +38,9 @@ void test_append(ARRAY_TYPE arr[])
 	printArray(arr);
 	int capacity = 3, value = 42;
 	appendArray(arr, capacity, 42);
-	cout << "Appended " << value << " at capacity " << capacity;
+	cout << "Appended " << value << " at capacity " << capacity << endl;
 	printArray(arr);
+	cout << endl;
 }
 
 void test_shiftLeft(ARRAY_TYPE arr[], int index)
@@ -36,6 +51,7 @@ void test_shiftLeft(ARRAY_TYPE arr[], int index)
 	shiftLeft(arr, index);
 	cout << "Shifted array at index = " << index << ": " << endl;
 	printArray(arr);
+	cout << endl;
 }
 
 void test_shiftRight(ARRAY_TYPE arr[], int index)
@@ -46,6 +62,7 @@ void test_shiftRight(ARRAY_TYPE arr[], int index)
 	shiftRight(arr, index);
 	cout << "Shifted array at index = " << index << ": " << endl;
 	printArray(arr);
+	cout << endl;
 }
 
 void test_selectionSort(ARRAY_TYPE arr[])
@@ -56,6 +73,7 @@ void test_selectionSort(ARRAY_TYPE arr[])
 	selectionSort(arr);
 	cout << "Sorted array using selection sort: " << endl;
 	printArray(arr);
+	cout << endl;
 }
 
 void test_bubbleSort(ARRAY_TYPE arr[])
@@ -66,6 +84,7 @@ void test_bubbleSort(ARRAY_TYPE arr[])
 	bubbleSort(arr);
 	cout << "Sorted array using bubble sort: " << endl;
 	printArray(arr);
+	cout << endl;
 }
 
 /*
@@ -75,10 +94,13 @@ RETURN VALUES: none, outputs to console
 */
 void testFnc(ARRAY_TYPE arr[])
 {
+	test_fillArrayCons(arr);
+	test_fillArrayRand(arr);
 	////test shiftLeft
 	test_shiftLeft(arr, 2);
 	////test shiftRight
-	test_shiftRight(arr, 2);
+	test_shiftRight(arr, 6);
+	
 
 	
 }

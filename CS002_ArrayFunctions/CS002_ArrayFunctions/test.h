@@ -1,7 +1,8 @@
 #pragma once
 typedef int ARRAY_TYPE;
 
-void test_fill();
+void test_fillArrayCons(ARRAY_TYPE arr[]);
+void test_fillArrayRand(ARRAY_TYPE arr[]);
 //void test_print();
 
 void test_append(ARRAY_TYPE arr[]);
