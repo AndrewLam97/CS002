@@ -99,6 +99,11 @@ string stringNum(int entryNum)
 	return stringNumber;
 }
 
+/*
+PURPOSE: Prints strings
+PARAMETERS: starting integer x for number of repetitions
+RETURN VALUES: none, couts song lyrics
+*/
 void printSong(int x)
 {
 	for (x; x > 0; x--)//loops from given starting number until 0

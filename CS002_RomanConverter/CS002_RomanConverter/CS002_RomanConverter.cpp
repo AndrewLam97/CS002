@@ -61,7 +61,7 @@ void romanPrinter(Number& entryNumber)
 		cout << romanConvert(1000);
 	}
 
-	do //handles hundreds place, prints value and decrements by printed amount
+	do //handles hundreds place, prints value and decrements by printed amount, repeats until place value is 0
 	{
 		tempMulti = 100;
 		if (entryNumber.hundreds == 9)
@@ -87,7 +87,7 @@ void romanPrinter(Number& entryNumber)
 		else break;
 	} while (entryNumber.hundreds > 0);
 
-	do //handles tens place, prints value and decrements by printed amount
+	do //handles tens place, prints value and decrements by printed amount, repeats until place value is 0
 	{
 		tempMulti = 10;
 		if (entryNumber.tens == 9)
@@ -113,7 +113,7 @@ void romanPrinter(Number& entryNumber)
 		else break;
 	} while (entryNumber.tens > 0);
 
-	do //handles ones place, prints value and decrements by printed amount
+	do //handles ones place, prints value and decrements by printed amount, repeats until place value is 0
 	{
 		if (entryNumber.ones == 9)
 		{
