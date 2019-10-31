@@ -37,7 +37,7 @@ void test_append(ARRAY_TYPE arr[])
 	cout << "Original array: " << endl;
 	printArray(arr);
 	int capacity = 3, value = 42;
-	appendArray(arr, capacity, 42);
+	append(arr, capacity, 42);
 	cout << "Appended " << value << " at capacity " << capacity << endl;
 	printArray(arr);
 	cout << endl;

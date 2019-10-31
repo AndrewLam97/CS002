@@ -56,13 +56,18 @@ PURPOSE: Appends an integer value to an integer array at index capacity
 PARAMETERS: integer array, integer capacity by reference, integer value
 RETURN VALUES: none, array modified in place
 */
-void appendArray(ARRAY_TYPE array[], int& capacity, int value)
+void append(ARRAY_TYPE array[], int& capacity, int value)
 {
 	if (capacity < MAX_SIZE)
 	{
 		array[capacity++] = value;
 	}
 	//for (int i = 0; i < MAX_SIZE; i++)
+}
+
+void appendArray(ARRAY_TYPE array[], int destinationIndex, ARRAY_TYPE sourceArray[], int sourceIndex)
+{
+
 }
 
 /*
