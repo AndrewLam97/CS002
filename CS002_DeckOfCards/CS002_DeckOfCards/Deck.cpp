@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
+using namespace std;
 
 bool Deck::inDeck(int row, int col)
 {
