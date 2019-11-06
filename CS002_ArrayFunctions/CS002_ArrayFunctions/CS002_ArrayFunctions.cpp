@@ -10,6 +10,6 @@ int main()
 	ARRAY_TYPE arr[MAX_SIZE] = { 1,2,3,4,5 };
 	int num_used = 5;
 
-	testFnc(arr);
+	testFnc(arr, num_used);
 }
 
