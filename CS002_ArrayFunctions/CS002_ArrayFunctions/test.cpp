@@ -8,15 +8,15 @@ typedef int ARRAY_TYPE;
 
 //void test_print()
 
-void test_fillArrayCons(ARRAY_TYPE arr[])
+void test_fillArrayCons(ARRAY_TYPE arr[], int& num_used)
 {
 	cout << "Testing constant fill..." << endl;
 	cout << "Original array: " << endl;
-	printArray(arr);
+	printArray(arr,num_used);
 	int value = 7;
 	fillArrayCons(arr, value);
 	cout << "Filled array with " << value << endl;
-	printArray(arr);
+	printArray(arr,num_used);
 	cout << endl;
 }
 
@@ -24,7 +24,7 @@ void test_fillArrayRand(ARRAY_TYPE arr[])
 {
 	cout << "Testing random fill..." << endl;
 	cout << "Original array: " << endl;
-	printArray(arr);
+	printArray(arr, num_used;
 	fillArrayRand(arr);
 	cout << "Filled array with random values" << endl;
 	printArray(arr);
@@ -92,7 +92,7 @@ PURPOSE: driver function for testing aray sorting
 PARAMETERS: integer array and array size
 RETURN VALUES: none, outputs to console
 */
-void testFnc(ARRAY_TYPE arr[])
+void testFnc(ARRAY_TYPE arr[], int& num_used)
 {
 	test_fillArrayCons(arr);
 	test_fillArrayRand(arr);

@@ -3,7 +3,7 @@
 #include <random>
 using namespace std;
 
-const int MAX_SIZE = 10;
+const int MAX_SIZE = 20;
 typedef int ARRAY_TYPE;
 
 /*
@@ -41,10 +41,10 @@ PURPOSE: Prints an array to console
 PARAMETERS: integer array, size of array
 RETURN VALUES: none, outputs to console
 */
-void printArray(ARRAY_TYPE array[])
+void printArray(ARRAY_TYPE array[], int num_used)
 {
 	cout << "[ ";
-	for (int i = 0; i < MAX_SIZE; i++) //iterate through array
+	for (int i = 0; i < num_used; i++) //iterate through array
 	{
 		cout << array[i] << " "; //print integer at current index
 	}
@@ -56,13 +56,12 @@ PURPOSE: Appends an integer value to an integer array at index capacity
 PARAMETERS: integer array, integer capacity by reference, integer value
 RETURN VALUES: none, array modified in place
 */
-void append(ARRAY_TYPE array[], int& capacity, int value)
+void append(ARRAY_TYPE array[], int& num_used, int item)
 {
-	if (capacity < MAX_SIZE)
+	if (num_used < MAX_SIZE-1)
 	{
-		array[capacity++] = value;
+		array[num_used++] = item;
 	}
-	//for (int i = 0; i < MAX_SIZE; i++)
 }
 
 void appendArray(ARRAY_TYPE array[], int destinationIndex, ARRAY_TYPE sourceArray[], int sourceIndex)
@@ -112,12 +111,13 @@ void swap(ARRAY_TYPE array[], int pos1, int pos2)
 	array[pos2] = temp; //replace integer at pos2 with saved pos1 
 }
 
-void shiftLeft(ARRAY_TYPE array[], int index)
+void shiftLeft(ARRAY_TYPE array[], int& num_used, int mark)
 {
-	for (int i = index - 1; i >= 0; i--)
+	for (int i = mark - 1; i >= 0; i--)
 	{
-		swap(array, index, i);
+		swap(array, mark, i);
 	}
+	num_used--;
 }
 
 /*
@@ -125,12 +125,30 @@ PURPOSE: shifts an integer array to the right starting at index
 PARAMETERS: integer array and integer index
 RETURN VALUES: none, array modified in place
 */
-void shiftRight(ARRAY_TYPE array[], int index)
+void shiftRight(ARRAY_TYPE array[], int& num_used, int mark)
 {
-	for (int i = index + 1; i < MAX_SIZE; i++)
+	for (int i = mark + 1; i < MAX_SIZE; i++)
 	{
-		swap(array, index, i);
+		swap(array, mark, i);
 	}
+	num_used++;
+}
+
+void insert_before(ARRAY_TYPE array[], int& num_used, int item, int mark)
+{
+	shiftRight(array, num_used, mark);
+	array[mark] = item;
+}
+void insert_after(ARRAY_TYPE array[], int& num_used, int item, int mark)
+{
+	shiftRight(array, num_used, mark+1);
+	array[mark + 1] = item;
+}
+
+void remove(int array[], int& num_used, int mark)
+{
+	shiftLeft(array, num_used, mark);
+	num_used--;
 }
 
 /*
