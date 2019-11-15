@@ -29,7 +29,11 @@ vector<string> CS002::split(string& target, string delimiter)
 	size_t found = target.find(delimiter); //find index of delimiter string in target string
 	if (found != string::npos) //if delimiter string found
 	{
-		results.push_back(target.substr(0, found)); //add substring to results vector
+		if (target.substr(0, found) != "")//check if substring empty
+		{
+			results.push_back(target.substr(0, found)); //add substring to results vector
+		}
+		
 		target.erase(target.begin(), target.begin() + found + delimiter.size()); //erase substring and delimiter from target string
 		if (target != "" && target != delimiter)
 		{
@@ -67,9 +71,44 @@ void CS002::printVector()
 	cout << "]" << endl;
 }
 
+/*
+PURPOSE: Driver function for testing inputs
+PARAMETERS: none, takes inputs via console
+RETURN VALUES: none, outputs results to console
+*/
+void testFncString()
+{
+	string input;
+	do {
+		CS002 lab;
+		string test = "";
+		string delimiter = "";
+		char token;
+		
+		cout << "Enter a string: " << endl;
+		getline(cin, test);
+		
+		cout << "Enter a delimiter string or token char: " << endl;
+		getline(cin,delimiter);
+		if (delimiter.size() == 1) //if string size == 1, convert delimiter string to token char
+		{
+			token = delimiter[0];
+			lab.split(test, token); //call overloaded split with token
+			lab.printVector();
+		}
+		else {
+			lab.split(test, delimiter); //call overloaded split with string
+			lab.printVector();
+		}
+		cout << endl << "Go again? y/n" << endl;
+		cin >> input;
+		cin.ignore(1000, '\n');
+	} while (input == "y");
+}
+
 int main()
 {
-	CS002 lab;
+	/*CS002 lab;
 	string test = "10ab20ab30ab40";
 	string delimiter = "ab";
 	lab.split(test, delimiter);
@@ -79,5 +118,7 @@ int main()
 	test = "10ab20ab30ab40";
 	char token = 'a';
 	lab1.split(test, token);
-	lab1.printVector();
+	lab1.printVector();*/
+
+	testFncString();
 }
