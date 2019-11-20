@@ -14,8 +14,8 @@ class Board {
 protected:
 	vector<vector<char>> board;
 
-	int ROW_SIZE;
-	int COL_SIZE;
+	int ROWS;
+	int COLS;
 	char defaultChar;
 
 	void init();
@@ -32,10 +32,10 @@ public:
 	char getPiece(int row, int col);
 	int getSize();
 
-	void setROW_SIZE(int ROW_SIZE);
-	void setCOL_SIZE(int COL_SIZE);
+	void setROWS(int ROWS);
+	void setCOLS(int COLS);
 
 
 	Board();
-	Board(int ROW_SIZE, int COL_SIZE, char defaultChar);
+	Board(int ROWS, int COLS, char defaultChar);
 };
