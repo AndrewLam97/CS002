@@ -24,9 +24,10 @@ private:
 public:
 	void print();
 
-	bool addPiece(Move move);
-	void removePiece(Move move);
 	bool isValidMove(Move move);
+	void addPiece(Move move);
+	void removePiece(Move move);
+
 
 	char getPiece(int row, int col);
 	int getSize();

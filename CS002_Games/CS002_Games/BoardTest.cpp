@@ -18,7 +18,7 @@ void test_Constructor()
 void test_DefConstructor()
 {
 	cout << "Testing overloaded constructor..." << endl;
-	int ROW_SIZE = 10, COL_SIZE = 10;
+	int ROW_SIZE = 3, COL_SIZE = 3;
 	Board board(ROW_SIZE, COL_SIZE, 'X');
 	board.setROW_SIZE(ROW_SIZE);
 	board.setCOL_SIZE(COL_SIZE);
