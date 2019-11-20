@@ -31,6 +31,10 @@ public:
 	char getPiece(int row, int col);
 	int getSize();
 
+	void setROW_SIZE(int ROW_SIZE);
+	void setCOL_SIZE(int COL_SIZE);
+
+
 	Board();
 	Board(int ROW_SIZE, int COL_SIZE, char defaultChar);
 };

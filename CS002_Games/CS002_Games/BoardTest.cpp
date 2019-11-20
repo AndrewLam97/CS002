@@ -4,22 +4,23 @@
 
 void test_fnc()
 {
-	
+	//test_Constructor();
+	test_DefConstructor();
 }
 
 void test_Constructor()
 {
+	cout << "Testing default constructor..." << endl;
 	Board board;
+	board.print();
 }
 
 void test_DefConstructor()
 {
-	Board board(10, 10, 'X');
-}
-
-void test_Print()
-{
-	cout << "Testing default constructor..." << endl;
-	test_Constructor();
-	print();
+	cout << "Testing overloaded constructor..." << endl;
+	int ROW_SIZE = 10, COL_SIZE = 10;
+	Board board(ROW_SIZE, COL_SIZE, 'X');
+	board.setROW_SIZE(ROW_SIZE);
+	board.setCOL_SIZE(COL_SIZE);
+	board.print();
 }

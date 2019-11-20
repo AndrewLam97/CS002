@@ -23,12 +23,21 @@ Board::Board(int ROW_SIZE, int COL_SIZE, char defaultChar)
 
 void Board::print()
 {
-	for (auto i : board)
+	for (int i = 0; i < ROW_SIZE; i++)
 	{
 		cout << endl;
-		for (auto j : i)
+		for (int j = 0; j < COL_SIZE; j++)
 		{
-			cout << i[j] << " ";
+			cout << board[i][j] << " ";
 		}
 	}
+}
+
+void Board::setROW_SIZE(int ROW_SIZE)
+{
+	this->ROW_SIZE = ROW_SIZE;
+}
+void Board::setCOL_SIZE(int COL_SIZE)
+{
+	this->COL_SIZE = COL_SIZE;
 }
