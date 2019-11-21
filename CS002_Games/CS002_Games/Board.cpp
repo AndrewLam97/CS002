@@ -28,12 +28,8 @@ void Board::print()
 		for (int j = 0; j < COLS; j++)
 		{
 			cout << " " << board[i][j];
-			if (j != COLS - 1)
-			{
-				cout << " |";
-			}
-			
-		}		
+			if (j != COLS - 1) { cout << " |"; }
+		}
 		cout << endl;
 		if (i != ROWS - 1)
 		{
@@ -44,10 +40,6 @@ void Board::print()
 		}
 		cout << endl;
 	}
-	/*for (int j = 0; j < COLS; j++)
-	{
-		cout << board[board.size() - 1][j] << "|";
-	}*/
 }
 
 void Board::setROWS(int ROWS)
