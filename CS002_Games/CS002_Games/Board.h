@@ -36,6 +36,9 @@ public:
 	void setCOLS(int COLS);
 	void setDefaultChar(char defaultchar);
 
+	int getROWS();
+	int getCOLS();
+
 	Board();
 	Board(int ROWS, int COLS, char defaultChar);
 };
