@@ -18,8 +18,8 @@ void test_Constructor()
 void test_DefConstructor()
 {
 	cout << "Testing overloaded constructor..." << endl;
-	int ROWS = 6, COLS = 7;
-	Board board(ROWS, COLS, 'X');
+	int ROWS = 10, COLS = 10;
+	Board board(ROWS, COLS, '\0');
 	board.setROWS(ROWS);
 	board.setCOLS(COLS);
 	board.print();

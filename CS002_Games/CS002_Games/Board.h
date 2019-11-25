@@ -8,6 +8,7 @@ struct Move {
 	int col;
 	int player;
 	int color;
+	char piece;
 };
 
 class Board {
@@ -18,7 +19,7 @@ protected:
 	int COLS;
 	char defaultChar;
 
-	void init();
+	//void init();
 private:
 
 public:
@@ -28,13 +29,12 @@ public:
 	void addPiece(Move move);
 	void removePiece(Move move);
 
-
 	char getPiece(int row, int col);
-	int getSize();
+	//int getSize();
 
 	void setROWS(int ROWS);
 	void setCOLS(int COLS);
-
+	void setDefaultChar(char defaultchar);
 
 	Board();
 	Board(int ROWS, int COLS, char defaultChar);
