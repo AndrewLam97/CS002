@@ -4,7 +4,7 @@
 int BoardScorer::countVertical(Board board, int col, char piece)
 {
 	int verticalCount = 0;
-	for (int i = 0; i < board.getROWS; i++)
+	for (int i = 0; i < board.getROWS(); i++)
 	{
 		int temp = 0;
 		int j = i;
@@ -22,7 +22,7 @@ int BoardScorer::countVertical(Board board, int col, char piece)
 int BoardScorer::countHorizontal(Board board, int row, char piece)
 {
 	int horizontalCount = 0;
-	for (int i = 0; i < board.getCOLS; i++)
+	for (int i = 0; i < board.getCOLS(); i++)
 	{
 		int temp = 0;
 		int j = i;
@@ -44,21 +44,21 @@ int BoardScorer::countDiagonal(Board board, int startRow, int startCol, char pie
 
 	int diagonalCount = 0;
 	
-	int temp = 0;
+	int counter = 0;
 
-	for (int i = rowOffset; i < board.getROWS; i++)
+	for (int i = rowOffset; i < board.getROWS(); i++)
 	{
 		int temp = i;
 		int j = i - rowOffset;
 		while(board.getPiece(temp, j) == piece)
 		{
-			i++; j++;
-			temp++;
+			temp++; j++;
+			counter++;
 		}
 	}
-	if (temp > diagonalCount)
+	if (counter > diagonalCount)
 	{
-		diagonalCount = temp;
+		diagonalCount = counter;
 	}
 	return diagonalCount;
 }

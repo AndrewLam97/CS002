@@ -6,9 +6,9 @@ using namespace std;
 struct Move {
 	int row;
 	int col;
+	char piece;
 	int player;
 	int color;
-	char piece;
 };
 
 class Board {

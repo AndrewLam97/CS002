@@ -2,8 +2,8 @@
 
 Board::Board()
 {
-	ROWS = 3;
-	COLS = 3;
+	setROWS(3);
+	setCOLS(3);
 	setDefaultChar('\0');
 
 	for (int i = 0; i < ROWS; i++)
@@ -19,6 +19,8 @@ Board::Board()
 Board::Board(int ROWS, int COLS, char defaultChar)
 {
 	setDefaultChar(defaultChar);
+	setROWS(ROWS);
+	setCOLS(COLS);
 	vector<vector<char>> vec2(ROWS, vector<char>(COLS, this->defaultChar));
 	board = vec2;
 }
@@ -74,7 +76,7 @@ int Board::getCOLS()
 
 bool Board::isValidMove(Move move)
 {
-	if (board[move.row][move.col] != '\0')
+	if (board[move.row][move.col] == '\0')
 		return true;
 	else return false;
 }
@@ -83,7 +85,7 @@ void Board::addPiece(Move move)
 {
 	if (isValidMove(move))
 	{
-		board[move.row][move.col] == move.piece;
+		board[move.row][move.col] = move.piece;
 	}
 }
 
@@ -91,7 +93,7 @@ void Board::removePiece(Move move)
 {
 	if (!isValidMove(move))
 	{
-		board[move.row][move.col] == defaultChar;
+		board[move.row][move.col] = defaultChar;
 	}
 }
 

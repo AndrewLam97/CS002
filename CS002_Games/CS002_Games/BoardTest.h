@@ -4,6 +4,8 @@ void test_fnc();
 
 void test_Constructor();
 void test_DefConstructor();
-void test_Print();
+//void test_Print();
+void test_Pieces();
+
 
 
