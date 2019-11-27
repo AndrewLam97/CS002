@@ -7,12 +7,14 @@ void test_fnc()
 	//test_Constructor();
 	//test_DefConstructor();
 	//test_Pieces();
-	test_Horizontal();
-	test_Vertical();
-	test_Diagonal();
-	test_Diagonal1();
-	test_DiagonalAlt();
+	//test_Horizontal();
+	//test_Vertical();
+	//test_Diagonal();
+	//test_Diagonal1();
+	//test_Diagonal2();
+	//test_DiagonalAlt();
 	test_DiagonalAlt1();
+	test_DiagonalAlt2();
 }
 
 void test_Constructor()
@@ -120,20 +122,42 @@ void test_Diagonal1()
 	int ROWS = 10, COLS = 10;
 	char p1 = 'x';
 	Board board(ROWS, COLS, '\0');
-	for (int i = 1; i < 10; i++)
+	for (int i = 2; i < 10; i++)
 	{
-		int j = i - 1;
+		int j = i - 2;
 		Move move = { i,j,p1 };
 		board.addPiece(move);
 	}
 	board.print();
 	BoardScorer bscore;
-	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 1, 0, p1) << endl << endl;
-	cout << "Removing piece at (3,2)..." << endl;
-	Move move = { 3,2,'x' };
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 4, 2, p1) << endl << endl;
+	cout << "Removing piece at (4,2)..." << endl;
+	Move move = { 4,2,'x' };
 	board.removePiece(move);
 	board.print();
-	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 1, 0, p1) << endl << endl;
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 9, 7, p1) << endl << endl;
+}
+
+void test_Diagonal2()
+{
+	cout << "Testing TLBR diagonal counter..." << endl;
+	int ROWS = 10, COLS = 10;
+	char p1 = 'x';
+	Board board(ROWS, COLS, '\0');
+	for (int i = 0; i < 8; i++)
+	{
+		int j = i + 2;
+		Move move = { i,j,p1 };
+		board.addPiece(move);
+	}
+	board.print();
+	BoardScorer bscore;
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 7, 9, p1) << endl << endl;
+	cout << "Removing piece at (3,5)..." << endl;
+	Move move = { 3,5,'x' };
+	board.removePiece(move);
+	board.print();
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 7, 9, p1) << endl << endl;
 }
 
 void test_DiagonalAlt()
@@ -164,18 +188,40 @@ void test_DiagonalAlt1()
 	int ROWS = 10, COLS = 10;
 	char p1 = 'x';
 	Board board(ROWS, COLS, '\0');
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 9; i++)
 	{
-		int j = 4 - i;
+		int j = 8 - i;
 		Move move = { i,j,p1 };
 		board.addPiece(move);
 	}
 	board.print();
 	BoardScorer bscore;
-	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 1, 3, p1) << endl << endl;
-	cout << "Removing piece at (3,1)..." << endl;
-	Move move = { 3,1,'x' };
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 8, 0, p1) << endl << endl;
+	cout << "Removing piece at (6,2)..." << endl;
+	Move move = { 6,2,'x' };
 	board.removePiece(move);
 	board.print();
-	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 3, 1, p1) << endl << endl;
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 0, 8, p1) << endl << endl;
+}
+
+void test_DiagonalAlt2()
+{
+	cout << "Testing TRBL diagonal counter..." << endl;
+	int ROWS = 10, COLS = 10;
+	char p1 = 'x';
+	Board board(ROWS, COLS, '\0');
+	for (int i = 4; i < 10; i++)
+	{
+		int j = 12 - i;
+		Move move = { i,j,p1 };
+		board.addPiece(move);
+	}
+	board.print();
+	BoardScorer bscore;
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 5, 7, p1) << endl << endl;
+	cout << "Removing piece at (8,4)..." << endl;
+	Move move = { 8,4,'x' };
+	board.removePiece(move);
+	board.print();
+	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 9, 3, p1) << endl << endl;
 }

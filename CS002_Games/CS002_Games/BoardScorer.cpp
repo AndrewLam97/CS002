@@ -46,11 +46,17 @@ int BoardScorer::countHorizontal(Board board, int row, char piece)
 int BoardScorer::countDiagonal(Board board, int startRow, int startCol, char piece)
 {
 	int rowOffset = startRow - startCol;
-	int diagonalCount = 0;
+	int diagonalCount = 0; 
 	int temp = 0;
 
 	int i = rowOffset;
-	int j = i - rowOffset;
+	int j = 0;
+
+	if (rowOffset < 0)
+	{
+		i = 0;
+		j = abs(rowOffset);
+	}
 	while ( i < board.getROWS() && j < board.getCOLS() )
 	{
 		if (board.getPiece(i, j) != piece)
@@ -72,7 +78,7 @@ int BoardScorer::countDiagonal(Board board, int startRow, int startCol, char pie
 	return diagonalCount;
 }
 
-int BoardScorer::countDiagonalAlt(Board board, int startRow, int startCol, char piece)
+int BoardScorer::countDiagonalAlt(Board board, int startRow, int startCol, char piece) //CHECKME
 {
 	//int colOffset = startCol - startRow;
 	int diagonalCount = 0;
@@ -80,6 +86,12 @@ int BoardScorer::countDiagonalAlt(Board board, int startRow, int startCol, char 
 
 	int i = 0;
 	int j = startRow + startCol;
+
+	if (j > board.getCOLS() - 1)
+	{
+		i = j - 9;
+		j = board.getCOLS() - 1;
+	}
 	while (i < board.getROWS() && j >= 0)
 	{
 		if (board.getPiece(i, j) != piece)
