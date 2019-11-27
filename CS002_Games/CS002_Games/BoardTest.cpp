@@ -7,8 +7,8 @@ void test_fnc()
 	//test_Constructor();
 	//test_DefConstructor();
 	//test_Pieces();
-	//test_Horizontal();
-	//test_Vertical();
+	test_Horizontal();
+	test_Vertical();
 	test_Diagonal();
 	test_Diagonal1();
 	test_DiagonalAlt();
@@ -42,7 +42,7 @@ void test_Pieces()
 	move = { 0,2, 'x' };
 	board.addPiece(move);
 	board.print();
-	cout << endl << "Removing move at (0,2)" << endl;
+	cout << endl << "Removing piece at (0,2)" << endl;
 	board.removePiece(move);
 	board.print();
 }
@@ -61,7 +61,7 @@ void test_Horizontal()
 	board.print();
 	BoardScorer bscore;
 	cout << "Horizontal count for " << p1 << ": " << bscore.countHorizontal(board, 0, p1) << endl << endl;
-	cout << "Removing a piece at (0,3)..." << endl;
+	cout << "Removing piece at (0,3)..." << endl;
 	Move move = { 0,3,'x' };
 	board.removePiece(move);
 	board.print();
@@ -82,12 +82,12 @@ void test_Vertical()
 	board.print();
 	BoardScorer bscore;
 	cout << "Vertical count for " << p1 << ": " << bscore.countVertical(board, 9, p1) << endl << endl;
-	cout << "Removing a piece at (7,9)..." << endl;
+	cout << "Removing piece at (7,9)..." << endl;
 	Move move = { 7,9,'x' };
 	board.removePiece(move);
 	board.print();
 	cout << "Vertical count for " << p1 << ": " << bscore.countVertical(board, 9, p1) << endl;
-	cout << "Removing a piece at (2,9)..." << endl;
+	cout << "Removing piece at (2,9)..." << endl;
 	move = { 2,9,'x' };
 	board.removePiece(move);
 	board.print();
@@ -129,6 +129,7 @@ void test_Diagonal1()
 	board.print();
 	BoardScorer bscore;
 	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonal(board, 1, 0, p1) << endl << endl;
+	cout << "Removing piece at (3,2)..." << endl;
 	Move move = { 3,2,'x' };
 	board.removePiece(move);
 	board.print();
@@ -150,6 +151,7 @@ void test_DiagonalAlt()
 	board.print();
 	BoardScorer bscore;
 	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 0, 9, p1) << endl << endl;
+	cout << "Removing piece at (5,4)..." << endl;
 	Move move = { 5,4,'x' };
 	board.removePiece(move);
 	board.print();
@@ -171,6 +173,7 @@ void test_DiagonalAlt1()
 	board.print();
 	BoardScorer bscore;
 	cout << "Diagonal count for " << p1 << ": " << bscore.countDiagonalAlt(board, 1, 3, p1) << endl << endl;
+	cout << "Removing piece at (3,1)..." << endl;
 	Move move = { 3,1,'x' };
 	board.removePiece(move);
 	board.print();
