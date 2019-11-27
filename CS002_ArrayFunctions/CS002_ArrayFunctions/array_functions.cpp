@@ -3,7 +3,7 @@
 #include <random>
 using namespace std;
 
-const int MAX_SIZE = 10;
+const int MAX_SIZE = 20;
 typedef int ARRAY_TYPE;
 
 /*
@@ -11,9 +11,9 @@ PURPOSE: Fills an array with random integers ranging from 1 to 100
 PARAMETERS: integer array, array size
 RETURN VALUES: none, array modified in place
 */
-void fillArrayRand(ARRAY_TYPE array[])
+void fillArrayRand(ARRAY_TYPE array[], int& num_used)
 {
-	for (int i = 0; i < MAX_SIZE; i++) //fills each index in array with random int
+	for (int i = 0; i < num_used; i++) //fills each index in array with random int
 	{
 		random_device device;
 		mt19937 generator(device());
@@ -28,9 +28,9 @@ PURPOSE: Fills an array with the same integer
 PARAMETERS: integer array, array size, desired value
 RETURN VALUES: none, array modified in place
 */
-void fillArrayCons(ARRAY_TYPE array[], int value)
+void fillArrayCons(ARRAY_TYPE array[], int& num_used, int value)
 {
-	for (int i = 0; i < MAX_SIZE; i++)
+	for (int i = 0; i < num_used; i++)
 	{
 		array[i] = value;
 	}
@@ -41,10 +41,10 @@ PURPOSE: Prints an array to console
 PARAMETERS: integer array, size of array
 RETURN VALUES: none, outputs to console
 */
-void printArray(ARRAY_TYPE array[])
+void printArray(ARRAY_TYPE array[], int num_used)
 {
 	cout << "[ ";
-	for (int i = 0; i < MAX_SIZE; i++) //iterate through array
+	for (int i = 0; i < num_used; i++) //iterate through array
 	{
 		cout << array[i] << " "; //print integer at current index
 	}
@@ -53,26 +53,42 @@ void printArray(ARRAY_TYPE array[])
 
 /*
 PURPOSE: Appends an integer value to an integer array at index capacity
-PARAMETERS: integer array, integer capacity by reference, integer value
+PARAMETERS: integer array, integer number of elements used, integer value
 RETURN VALUES: none, array modified in place
 */
-void appendArray(ARRAY_TYPE array[], int& capacity, int value)
+void append(ARRAY_TYPE array[], int& num_used, int item)
 {
-	if (capacity < MAX_SIZE)
+	if (num_used < MAX_SIZE-1)
 	{
-		array[capacity++] = value;
+		array[num_used++] = item;
 	}
-	//for (int i = 0; i < MAX_SIZE; i++)
+}
+
+/*
+PURPOSE: Appends source array to the end of destination array
+PARAMETERS: Destination integer array, integer destination number used, source integer array, integer source number used
+RETURN VALUES: none, destination array modified in place
+*/
+void appendArray(ARRAY_TYPE array[], int& num_used, ARRAY_TYPE sourceArray[], int src_num_used)
+{
+	if (num_used + src_num_used < MAX_SIZE)
+	{
+		for (int i = 0; i < src_num_used; i++)
+		{
+			array[i + num_used] = sourceArray[i];
+		}
+	}
+	num_used += src_num_used;
 }
 
 /*
 PURPOSE: Copies contents of first array to second array
-PARAMETERS: first and second integer array
+PARAMETERS: first and second integer array, integer of first array number used
 RETURN VALUES: none, modified in place
 */
-void copyArray(ARRAY_TYPE array[], int array2[])
+void copyArray(ARRAY_TYPE array[], int num_used, ARRAY_TYPE array2[])
 {
-	for (int i = 0; i < MAX_SIZE; i++)
+	for (int i = 0; i < num_used; i++)
 	{
 		array2[i] = array[i];
 	}
@@ -80,12 +96,12 @@ void copyArray(ARRAY_TYPE array[], int array2[])
 
 /*
 PURPOSE: Searches an integer array for an integer value and returns the index of that value
-PARAMETERS: integer array,  integer desired search value
+PARAMETERS: integer array, integer of number of elements used, integer desired search value
 RETURN VALUES: integer index of searched value
 */
-int search(ARRAY_TYPE array[], int value)
+int search(ARRAY_TYPE array[], int num_used, int value)
 {
-	for (int i = 0; i < MAX_SIZE; i++)
+	for (int i = 0; i < num_used; i++)
 	{
 		if(array[i] == value)
 		{
@@ -107,67 +123,160 @@ void swap(ARRAY_TYPE array[], int pos1, int pos2)
 	array[pos2] = temp; //replace integer at pos2 with saved pos1 
 }
 
-void shiftLeft(ARRAY_TYPE array[], int index)
+/*
+PURPOSE: shifts contents of array left, starting at index mark
+PARAMETERS: integer array, integer of number of elements used, integer mark
+RETURN VALUES: none, array modified in place
+*/
+void shiftLeft(ARRAY_TYPE array[], int& num_used, int mark)
 {
-	for (int i = index - 1; i >= 0; i--)
+	for (int i = num_used ; i > mark; i--)
 	{
-		swap(array, index, i);
+		swap(array, i, mark);
 	}
+	num_used--;
 }
 
 /*
 PURPOSE: shifts an integer array to the right starting at index
-PARAMETERS: integer array and integer index
+PARAMETERS: integer array, integer number of elements used, integer mark
 RETURN VALUES: none, array modified in place
 */
-void shiftRight(ARRAY_TYPE array[], int index)
+void shiftRight(ARRAY_TYPE array[], int& num_used, int mark)
 {
-	for (int i = index + 1; i < MAX_SIZE; i++)
+	for (int i = mark + 1; i < MAX_SIZE; i++)
 	{
-		swap(array, index, i);
+		swap(array, mark, i);
+	}
+	num_used++;
+}
+
+/*
+PURPOSE: inserts item into array before mark
+PARAMETERS: integer array, number of elements used, integer item, integer mark
+RETURN VALUES: none, variables and arrays modified in place
+*/
+void insert_before(ARRAY_TYPE array[], int& num_used, int item, int mark)
+{
+	shiftRight(array, num_used, mark);
+	array[mark] = item;
+}
+
+/*
+PURPOSE: inserts item into array after mark
+PARAMETERS: integer array, number of elements used, integer item, integer mark
+RETURN VALUES: none, variables and arrays modified in place
+*/
+void insert_after(ARRAY_TYPE array[], int& num_used, int item, int mark)
+{
+	shiftRight(array, num_used, mark+1);
+	array[mark + 1] = item;
+}
+
+/*
+PURPOSE: removed element in integer array at index mark
+PARAMETERS: integer array, number of elements used, integer mark
+RETURN VALUES: none, array modfified in place
+*/
+void remove(ARRAY_TYPE array[], int& num_used, int mark)
+{
+	shiftLeft(array, num_used, mark);
+}
+
+/*
+PURPOSE: deletes repeated integers in integer array
+PARAMETERS: integer array, number of elements used
+RETURN VALUES: none, array modified in place
+*/
+void deleteRepeats(ARRAY_TYPE array[], int& num_used)
+{
+	for (int i = 0; i < num_used-1; i++)
+	{
+		int temp = array[i];
+		for (int j = i+1; j < num_used; j++)
+		{
+			if (array[j] == temp)
+				remove(array, num_used, j);
+		}
+	}
+}
+
+/*
+PURPOSE: Reverses an array
+PARAMETERS: integer array and number of elements used
+RETURN VALUES: none, array modified in place
+*/
+void reverse(ARRAY_TYPE array[], int num_used)
+{
+	for (int i = 0; i < (num_used-1) / 2; i++)
+	{
+		swap(array, i, num_used - 1 - i);
 	}
 }
 
 /*
 PURPOSE: sorts an array of integers using selection sort
-PARAMETERS: integer array and size of array
+PARAMETERS: integer array, size of array, and ascending boolean
 RETURN VALUES: none, swaps performed in place
 */
-void selectionSort(ARRAY_TYPE array[])
+void selectionSort(ARRAY_TYPE array[], int num_used, bool ascending)
 {
-	int lowestPos;
-	for (int i = 0; i < MAX_SIZE - 1; i++) //iterate starting point
+	int markPos;
+	for (int i = 0; i < num_used - 1; i++) //iterate starting point
 	{
-		lowestPos = i;
-		for (int j = i + 1; j < MAX_SIZE; j++) //iterate secondary index
+		markPos = i;
+		for (int j = i + 1; j < num_used; j++) //iterate secondary index
 		{
-			if (array[j] < array[lowestPos]) //find index of lowest element
+			if (ascending == true)
 			{
-				lowestPos = j;
+				if (array[j] < array[markPos]) //find index of lowest element
+				{
+					markPos = j;
+				}
 			}
+			else
+			{
+				if (array[j] > array[markPos]) //find index of highest element
+				{
+					markPos = j;
+				}
+			}
+			
 		}
-		swap(array, i, lowestPos); //swap lowest to current starting point
+		swap(array, i, markPos); //swap markPos to current starting point
 	}
 }
 
 /*
 PURPOSE: sorts an array of integers using bubble sort
-PARAMETERS: integer array and size of array
+PARAMETERS: integer array, size of array, and ascending boolean
 RETURN VALUES: none, swaps performed in place
 */
-void bubbleSort(ARRAY_TYPE array[])
+void bubbleSort(ARRAY_TYPE array[], int num_used, bool ascending)
 {
 	bool swapped = true; //swapped flag
-	for (int i = 0; i < MAX_SIZE - 1 && swapped; i++) //iterate through array until maximum swaps (n^2) reached or no swaps performed amongst 1 pass
+	for (int i = 0; i < num_used - 1 && swapped; i++) //iterate through array until maximum swaps (n^2) reached or no swaps performed amongst 1 pass
 	{
 		swapped = false;
-		for (int j = 0; j < MAX_SIZE - 1 - i; j++) //iterate starting point
+		for (int j = 0; j < num_used - 1 - i; j++) //iterate starting point
 		{
-			if (array[j] > array[j + 1]) //compare current index to index + 1
+			if (ascending == true)
 			{
-				swap(array, j, j + 1);
-				swapped = true; //swapped flag
+				if (array[j] > array[j + 1]) //compare current index to index + 1
+				{
+					swap(array, j, j + 1);
+					swapped = true; //swapped flag
+				}
 			}
+			else 
+			{
+				if (array[j] < array[j + 1]) //compare current index to index + 1
+				{
+					swap(array, j, j + 1);
+					swapped = true; //swapped flag
+				}
+			}
+			
 		}
 	}
 }
