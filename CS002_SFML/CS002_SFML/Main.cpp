@@ -29,6 +29,23 @@ int main()
 				window.close();
 			}
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			sprite.move(1, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			sprite.move(-1, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			sprite.move(0, 1);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			sprite.move(0, -1);
+		}
+		
 		window.clear(sf::Color::Black);
 		window.draw(sprite);
 		window.display();
