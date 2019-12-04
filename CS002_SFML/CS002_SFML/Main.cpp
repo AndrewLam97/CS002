@@ -1,10 +1,12 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "TicTacToeTest.h"
 using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080, 32), "SFML Demo");
+	test_fnc();
+	/*sf::RenderWindow window(sf::VideoMode(1920, 1080, 32), "SFML Demo");
 	sf::Texture texture;
 	
 	if (!texture.loadFromFile("csgo1.png"))
@@ -51,5 +53,5 @@ int main()
 		window.display();
 	}
 
-	return 0;
+	return 0;*/
 }

@@ -1,4 +1,5 @@
 #include "TicTacToe.h"
+//#include <iostream>
 
 void TicTacToe::init()
 {
@@ -12,15 +13,25 @@ void TicTacToe::init()
 	left.setFillColor(sf::Color::White);
 	
 	right.setSize(sf::Vector2f(boxStart, winSize.y));
-	right.setPosition(winSize.x - ((boxSize * 3) + (spacer * 2)), 0);
+	right.setPosition(winSize.x - boxStart, 0);
 	right.setFillColor(sf::Color::White);
 
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
+	for(int i = 0; i < 3;)
 
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
 		}
+		window.clear(sf::Color::Black);
+		window.draw(left);
+		window.draw(right);
+		window.display();
 	}
 }
 
