@@ -16,7 +16,7 @@ void TicTacToe::init()
 	right.setPosition(winSize.x - boxStart, 0);
 	right.setFillColor(sf::Color::White);
 
-	for(int i = 0; i < 3;)
+	
 
 	while (window.isOpen())
 	{
