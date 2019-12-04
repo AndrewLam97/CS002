@@ -78,7 +78,7 @@ int BoardScorer::countDiagonal(Board board, int startRow, int startCol, char pie
 	return diagonalCount;
 }
 
-int BoardScorer::countDiagonalAlt(Board board, int startRow, int startCol, char piece) //CHECKME
+int BoardScorer::countDiagonalAlt(Board board, int startRow, int startCol, char piece)
 {
 	//int colOffset = startCol - startRow;
 	int diagonalCount = 0;
