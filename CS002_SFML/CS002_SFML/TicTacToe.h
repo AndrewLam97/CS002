@@ -8,6 +8,7 @@ class TicTacToe
 protected:
 private:
 	std::vector<std::vector<Tile>> tileVec;
+	std::vector<std::vector<sf::Sprite>> spriteVec;
 	Tile tile; //test tile
 
 	sf::RectangleShape squares[9], left, right;
@@ -19,6 +20,7 @@ public:
 
 	void drawBoard();
 	void drawTiles();
+	void drawSprites();
 	TicTacToe();
 };
 
