@@ -13,16 +13,16 @@ void TicTacToe::drawTiles()
 	}
 }
 
-void TicTacToe::drawSprites()
-{
-	for (int i = 0; i < spriteVec.size(); i++)
-	{
-		for (int j = 0; j < spriteVec[i].size(); j++)
-		{
-			window.draw(spriteVec[i][j]);
-		}
-	}
-}
+//void TicTacToe::drawSprites()
+//{
+//	for (int i = 0; i < spriteVec.size(); i++)
+//	{
+//		for (int j = 0; j < spriteVec[i].size(); j++)
+//		{
+//			window.draw(spriteVec[i][j]);
+//		}
+//	}
+//}
 
 void TicTacToe::drawBoard()
 {
@@ -90,7 +90,9 @@ void TicTacToe::init()
 	//tileVec[0][2].setPos(boxStart + 2 * boxSize + 2 * spacer, 0);
 	//tileVec[0][2].setTile('b');
 	//tileVec[1][1].setPos(boxStart + boxSize + spacer, boxSize + spacer);
-	//tileVec[1][1].setTile('x');
+	tileVec[1][1].setTile('x');
+	tileVec[2][2].setTile('o');
+	tileVec[2][1].setTile('o');
 
 
 	/*for (int i = 0; i < 3; i++)
@@ -111,7 +113,7 @@ void TicTacToe::init()
 }
 
 TicTacToe::TicTacToe()
-	:window(sf::VideoMode(1920, 1080, 32), "Tic Tac Toe")
+	:window(sf::VideoMode(1280, 720, 32), "Tic Tac Toe")
 {
 	init();
 }

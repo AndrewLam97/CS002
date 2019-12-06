@@ -10,7 +10,7 @@ void Tile::setTile(char value)
 		}
 		sprite.setTexture(texture, true);
 		texture.setSmooth(true);
-		sprite.setScale(0.283, 0.283);
+		sprite.setScale(0.283, 0.283); //1080p
 	}
 	if (value == 'o')
 	{
@@ -21,7 +21,7 @@ void Tile::setTile(char value)
 		}
 		sprite.setTexture(texture, true);
 		texture.setSmooth(true);
-		sprite.setScale(0.566, 0.566);
+		sprite.setScale(0.566, 0.566); //1080p
 	}
 	if (value == 'b')
 	{
@@ -31,7 +31,7 @@ void Tile::setTile(char value)
 			std::cout << "Error loading: " << bStr << std::endl;
 		}
 		sprite.setTexture(texture);
-		sprite.setScale(0.664, 0.664);
+		sprite.setScale(0.664, 0.664); //1080p
 	}
 }
 
@@ -48,9 +48,5 @@ sf::Sprite Tile::getSprite()
 Tile::Tile()
 {
 	sf::Sprite sprite;
-	if(!texture.create(200,200))
-	{}
 	setTile('b');
-	
-	sprite.setColor(sf::Color::White);
 }

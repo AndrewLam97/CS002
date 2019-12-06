@@ -8,6 +8,7 @@ class Tile
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
+	sf::Vector2u winSize;
 public:
 	void setTile(char value);
 	void setPos(float x, float y);
