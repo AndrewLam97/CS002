@@ -27,6 +27,12 @@
     <ClCompile Include="BoardTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TicTacToe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TicTacToeTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoardTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TicTacToe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TicTacToeTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

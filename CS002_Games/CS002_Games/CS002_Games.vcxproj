@@ -155,11 +155,15 @@
     <ClCompile Include="BoardScorer.cpp" />
     <ClCompile Include="BoardTest.cpp" />
     <ClCompile Include="CS002_Games.cpp" />
+    <ClCompile Include="TicTacToe.cpp" />
+    <ClCompile Include="TicTacToeTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardScorer.h" />
     <ClInclude Include="BoardTest.h" />
+    <ClInclude Include="TicTacToe.h" />
+    <ClInclude Include="TicTacToeTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
