@@ -1,5 +1,4 @@
 #include "TicTacToe.h"
-//#include <iostream>
 //sprite.getGlobalBounds().contains(mousePos)	
 
 void TicTacToe::drawTiles()
@@ -12,17 +11,6 @@ void TicTacToe::drawTiles()
 		}
 	}
 }
-
-//void TicTacToe::drawSprites()
-//{
-//	for (int i = 0; i < spriteVec.size(); i++)
-//	{
-//		for (int j = 0; j < spriteVec[i].size(); j++)
-//		{
-//			window.draw(spriteVec[i][j]);
-//		}
-//	}
-//}
 
 void TicTacToe::drawBoard()
 {
@@ -39,14 +27,39 @@ void TicTacToe::drawBoard()
 		window.clear(sf::Color::Black);
 		window.draw(left);
 		window.draw(right);
+		updateBoard(tttBoard);
 		drawTiles(); //draw tileVec
-		//drawSprites();
 		window.display();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) //TEST BOARD UPDATE
+		{
+			Move move{ 1, 1, 'x' };
+			tttBoard.addPiece(move);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) //TEST BOARD UPDATE
+		{
+			Move move{ 2, 2, 'o' };
+			tttBoard.addPiece(move);
+		}
+	}
+}
+
+void TicTacToe::updateBoard(Board tttBoard)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			tileVec[i][j].setTile(tttBoard.getPiece(i,j));
+		}
 	}
 }
 
 void TicTacToe::init()
 {
+	Board tttBoard(3, 3, '\0'); //initialize Board 
+	BoardScorer tttBS; //initialize BoardScorer
+
 	sf::Vector2u winSize = window.getSize();
 	float boxStart = (winSize.x - winSize.y) / 2.f;
 	std::cout << "boxStart: " << boxStart << std::endl;
@@ -82,32 +95,17 @@ void TicTacToe::init()
 		}
 		yPos += (boxSize + spacer);
 	}
+
 	////TEST TILE VEC
-	//tileVec[0][0].setPos(boxStart, 0);
-	tileVec[0][0].setTile('x');
-	//tileVec[0][1].setPos(boxStart + boxSize + spacer, 0);
-	tileVec[0][1].setTile('o');
-	//tileVec[0][2].setPos(boxStart + 2 * boxSize + 2 * spacer, 0);
-	//tileVec[0][2].setTile('b');
-	//tileVec[1][1].setPos(boxStart + boxSize + spacer, boxSize + spacer);
-	tileVec[1][1].setTile('x');
-	tileVec[2][2].setTile('o');
-	tileVec[2][1].setTile('o');
-
-
-	/*for (int i = 0; i < 3; i++)
-	{
-		xPos = 0;
-		spriteVec.push_back(std::vector<sf::Sprite>());
-		for (int j = 0; j < 3; j++)
-		{
-			xPos += (boxSize + spacer);
-			sf::Sprite sprite;
-			sprite.setPosition(xPos, yPos);
-			spriteVec[i].push_back(sprite);
-		}
-		yPos += (boxSize + spacer);
-	}*/
+	//tileVec[0][0].setTile('x');
+	//tileVec[0][1].setTile('o');
+	//tileVec[0][2].setTile('x');
+	//tileVec[1][0].setTile('o');
+	//tileVec[1][1].setTile('x');
+	//tileVec[1][2].setTile('x');
+	//tileVec[2][0].setTile('x');
+	//tileVec[2][1].setTile('o');
+	//tileVec[2][2].setTile('o');
 
 	drawBoard();
 }

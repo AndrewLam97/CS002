@@ -74,6 +74,11 @@ int Board::getCOLS()
 	return COLS;
 }
 
+vector<vector<char>> Board::getBoard()
+{
+	return board;
+}
+
 bool Board::isValidMove(Move move)
 {
 	if (board[move.row][move.col] == '\0')

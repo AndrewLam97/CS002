@@ -19,7 +19,6 @@ protected:
 	int COLS;
 	char defaultChar;
 
-	//void init();
 private:
 
 public:
@@ -30,7 +29,6 @@ public:
 	void removePiece(Move move);
 
 	char getPiece(int row, int col);
-	//int getSize();
 
 	void setROWS(int ROWS);
 	void setCOLS(int COLS);
@@ -38,6 +36,7 @@ public:
 
 	int getROWS();
 	int getCOLS();
+	vector<vector<char>> getBoard();
 
 	Board();
 	Board(int ROWS, int COLS, char defaultChar);
