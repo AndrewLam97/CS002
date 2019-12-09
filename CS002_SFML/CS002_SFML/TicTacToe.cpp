@@ -113,7 +113,7 @@ void TicTacToe::init()
 }
 
 TicTacToe::TicTacToe()
-	:window(sf::VideoMode(1280, 720, 32), "Tic Tac Toe")
+	:window(sf::VideoMode(1920, 1080, 32), "Tic Tac Toe")
 {
 	init();
 }
