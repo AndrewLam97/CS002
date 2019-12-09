@@ -27,7 +27,7 @@ void TicTacToe::drawBoard()
 		window.clear(sf::Color::Black);
 		window.draw(left);
 		window.draw(right);
-		updateBoard(tttBoard);
+		updateBoard(tttBoard); //update tileVec from board
 		drawTiles(); //draw tileVec
 		window.display();
 
@@ -44,7 +44,7 @@ void TicTacToe::drawBoard()
 	}
 }
 
-void TicTacToe::updateBoard(Board tttBoard)
+void TicTacToe::updateBoard(Board tttBoard) //update tileVec from board
 {
 	for (int i = 0; i < ROWS; i++)
 	{
