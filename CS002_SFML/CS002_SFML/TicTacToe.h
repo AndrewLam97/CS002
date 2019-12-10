@@ -8,7 +8,7 @@ class TicTacToe
 {
 protected:
 private:
-	int ROWS = 3, COLS = 3, WIN = 3;
+	int ROWS = 3, COLS = 3, WIN = 3, turn = 0;
 	bool gameRunning = true, player = true;
 
 	sf::Font font;

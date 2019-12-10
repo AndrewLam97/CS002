@@ -1,16 +1,4 @@
 #include "TicTacToe.h"
-int TicTacToe::gameState()
-{
-	if (tttBS.countAll(tttBoard, 'x') == 3)
-		return 1;
-	if (tttBS.countAll(tttBoard, 'o') == 3)
-		return 2;
-	if (tttBS.boardFull(tttBoard))
-		return 3;
-	else
-		return 0;
-}
-
 void TicTacToe::drawTiles()
 {
 	for (int i = 0; i < tileVec.size(); i++)
@@ -24,10 +12,10 @@ void TicTacToe::drawTiles()
 
 void TicTacToe::drawBoard()
 {
-	while (window.isOpen() )
+	while (window.isOpen() && gameRunning == true)
 	{
 		sf::Event event;
-		while (window.pollEvent(event) && gameRunning == true)
+		while (window.pollEvent(event) )
 		{
 			if (event.type == sf::Event::Closed)
 			{
@@ -39,14 +27,14 @@ void TicTacToe::drawBoard()
 				if (player == true)
 				{
 					move.piece = 'x';
-					std::cout << "placing x" << endl;
 					player = false;
+					turn++;
 				}
 				else if (player == false)
 				{
 					move.piece = 'o';
-					std::cout << "placing o" << endl;
 					player = true;
+					turn++;
 				}
 				tttBoard.addPiece(move);
 			}
@@ -55,16 +43,23 @@ void TicTacToe::drawBoard()
 		{
 		case 1:
 			std::cout << "x wins!" << endl;
-			text.setString("X wins!");
-			text.setCharacterSize(50);
+			//text.setString("X wins!");
+			//text.setCharacterSize(50);
+			//window.draw(text);
 			gameRunning = false;
 			break;
 		case 2:
 			std::cout << "o wins!" << endl;
+			//text.setString("O wins!");
+			//text.setCharacterSize(50);
+			//window.draw(text);
 			gameRunning = false;
 			break;
 		case 3:
 			std::cout << "Tie!" << endl;
+			//text.setString("Tie!");
+			//text.setCharacterSize(50);
+			//window.draw(text);
 			gameRunning = false;
 			break;
 		}
@@ -77,6 +72,19 @@ void TicTacToe::drawBoard()
 		window.display();
 	}
 }
+
+int TicTacToe::gameState()
+{
+	if (tttBS.countAll(tttBoard, 'x') == 3)
+		return 1;
+	if (tttBS.countAll(tttBoard, 'o') == 3)
+		return 2;
+	if (turn == 9) //tie
+		return 3;
+	else
+		return 0;
+}
+
 
 void TicTacToe::updateBoard(Board tttBoard) //update tileVec from board
 {
@@ -110,14 +118,15 @@ void TicTacToe::init()
 	Board tttBoard(3, 3, '\0'); //initialize Board 
 	BoardScorer tttBS; //initialize BoardScorer
 
+	std::cout << "Starting game!" << endl;
 	window.setKeyRepeatEnabled(false);
 	sf::Vector2u winSize = window.getSize();
 	float boxStart = (winSize.x - winSize.y) / 2.f;
-	std::cout << "boxStart: " << boxStart << std::endl;
+	//std::cout << "boxStart: " << boxStart << std::endl;
 	int spacer = 30;
-	std::cout << "spacer: " << spacer << std::endl;
+	//std::cout << "spacer: " << spacer << std::endl;
 	float boxSize = (winSize.y - (spacer * 2)) / 3.f;
-	std::cout << "boxSize: " << boxSize << std::endl;
+	//std::cout << "boxSize: " << boxSize << std::endl;
 	
 	left.setSize(sf::Vector2f(boxStart, winSize.y));
 	left.setPosition(0, 0);
@@ -152,11 +161,11 @@ void TicTacToe::init()
 TicTacToe::TicTacToe()
 	:window(sf::VideoMode(1920, 1080, 32), "Tic Tac Toe")
 {
-	if (!font.loadFromFile("ComicRelief.ttf"))
+	/*if (!font.loadFromFile("ComicRelief.ttf"))
 	{
 		return;
 	}
-	text.setFont(font);
+	text.setFont(font);*/
 
 	init();
 }
