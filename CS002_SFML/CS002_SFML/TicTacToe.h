@@ -8,7 +8,11 @@ class TicTacToe
 {
 protected:
 private:
-	int ROWS = 3, COLS = 3;
+	int ROWS = 3, COLS = 3, WIN = 3;
+	bool gameRunning = true, player = true;
+
+	sf::Font font;
+	sf::Text text;
 
 	Board tttBoard; //initialize Board 
 	BoardScorer tttBS; //initialize BoardScorer
@@ -24,6 +28,10 @@ private:
 	//Move playerMove();
 	//Move computerMove();
 	void updateBoard(Board tttBoard);
+	
+	Move getClick();
+
+	int gameState();
 
 public:
 

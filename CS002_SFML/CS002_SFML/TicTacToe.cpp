@@ -1,5 +1,15 @@
 #include "TicTacToe.h"
-//sprite.getGlobalBounds().contains(mousePos)	
+int TicTacToe::gameState()
+{
+	if (tttBS.countAll(tttBoard, 'x') == 3)
+		return 1;
+	if (tttBS.countAll(tttBoard, 'o') == 3)
+		return 2;
+	if (tttBS.boardFull(tttBoard))
+		return 3;
+	else
+		return 0;
+}
 
 void TicTacToe::drawTiles()
 {
@@ -14,33 +24,57 @@ void TicTacToe::drawTiles()
 
 void TicTacToe::drawBoard()
 {
-	while (window.isOpen())
+	while (window.isOpen() )
 	{
 		sf::Event event;
-		while (window.pollEvent(event))
+		while (window.pollEvent(event) && gameRunning == true)
 		{
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
+			else if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+			{
+				Move move = getClick();
+				if (player == true)
+				{
+					move.piece = 'x';
+					std::cout << "placing x" << endl;
+					player = false;
+				}
+				else if (player == false)
+				{
+					move.piece = 'o';
+					std::cout << "placing o" << endl;
+					player = true;
+				}
+				tttBoard.addPiece(move);
+			}
 		}
+		switch (gameState())
+		{
+		case 1:
+			std::cout << "x wins!" << endl;
+			text.setString("X wins!");
+			text.setCharacterSize(50);
+			gameRunning = false;
+			break;
+		case 2:
+			std::cout << "o wins!" << endl;
+			gameRunning = false;
+			break;
+		case 3:
+			std::cout << "Tie!" << endl;
+			gameRunning = false;
+			break;
+		}
+
 		window.clear(sf::Color::Black);
 		window.draw(left);
 		window.draw(right);
 		updateBoard(tttBoard); //update tileVec from board
 		drawTiles(); //draw tileVec
 		window.display();
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) //TEST BOARD UPDATE
-		{
-			Move move{ 1, 1, 'x' };
-			tttBoard.addPiece(move);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) //TEST BOARD UPDATE
-		{
-			Move move{ 2, 2, 'o' };
-			tttBoard.addPiece(move);
-		}
 	}
 }
 
@@ -55,11 +89,28 @@ void TicTacToe::updateBoard(Board tttBoard) //update tileVec from board
 	}
 }
 
+Move TicTacToe::getClick()
+{
+	Move move{};
+	auto mouse_pos = sf::Mouse::getPosition(window); // Mouse position relative to the window
+	auto translated_pos = window.mapPixelToCoords(mouse_pos); // Mouse position translated into world coordinates
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			if (tileVec[i][j].getSprite().getGlobalBounds().contains(translated_pos)) //check if sprite contains mouse coords
+			move = { i, j, 'x' };
+		}
+	}
+	return move;
+}
+
 void TicTacToe::init()
 {
 	Board tttBoard(3, 3, '\0'); //initialize Board 
 	BoardScorer tttBS; //initialize BoardScorer
 
+	window.setKeyRepeatEnabled(false);
 	sf::Vector2u winSize = window.getSize();
 	float boxStart = (winSize.x - winSize.y) / 2.f;
 	std::cout << "boxStart: " << boxStart << std::endl;
@@ -95,23 +146,17 @@ void TicTacToe::init()
 		}
 		yPos += (boxSize + spacer);
 	}
-
-	////TEST TILE VEC
-	//tileVec[0][0].setTile('x');
-	//tileVec[0][1].setTile('o');
-	//tileVec[0][2].setTile('x');
-	//tileVec[1][0].setTile('o');
-	//tileVec[1][1].setTile('x');
-	//tileVec[1][2].setTile('x');
-	//tileVec[2][0].setTile('x');
-	//tileVec[2][1].setTile('o');
-	//tileVec[2][2].setTile('o');
-
 	drawBoard();
 }
 
 TicTacToe::TicTacToe()
 	:window(sf::VideoMode(1920, 1080, 32), "Tic Tac Toe")
 {
+	if (!font.loadFromFile("ComicRelief.ttf"))
+	{
+		return;
+	}
+	text.setFont(font);
+
 	init();
 }

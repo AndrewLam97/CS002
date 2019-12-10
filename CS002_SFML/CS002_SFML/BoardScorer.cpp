@@ -1,5 +1,51 @@
 #include "BoardScorer.h"
 #include "Board.h"
+int BoardScorer::countAll(Board board, char piece)
+{
+	int max = 0;
+	int temp = 0;
+	for (int i = 0; i < board.getROWS(); i++)
+	{
+		temp = countHorizontal(board, i, piece);
+		if (temp > max)
+			max = temp;
+	}
+	for (int j = 0; j < board.getCOLS(); j++)
+	{
+		temp = countVertical(board, j, piece);
+		if (temp > max)
+			max = temp;
+	}
+	temp = countDiagonal(board, 0, 0, piece);
+			if (temp > max)
+				max = temp;
+	temp = countDiagonalAlt(board, 0, 2, piece);
+	if (temp > max)
+		max = temp;
+	return max;
+}
+
+bool BoardScorer::boardFull(Board board)
+{
+	bool isFull = true;
+	bool used = false;
+	for (int i = 0; i < board.getROWS(); i++)
+	{
+		for (int j = 0; j < board.getCOLS(); j++)
+		{
+			if (board.getPiece(i, j) == 'x' || board.getPiece(i,j) == 'o')
+			{
+				used = true;
+			}
+			if (used != true)
+			{
+				return false;
+			}
+		}
+	}
+	return isFull;
+}
+
 
 int BoardScorer::countVertical(Board board, int col, char piece)
 {
