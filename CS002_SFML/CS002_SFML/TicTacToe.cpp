@@ -15,51 +15,107 @@ void TicTacToe::drawBoard()
 	while (window.isOpen() && gameRunning == true)
 	{
 		sf::Event event;
-		while (window.pollEvent(event) )
+		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			else if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+			
+			//else if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+			//{
+			//	if (mode == 1)
+			//	{
+			//		if (player == true)
+			//		{
+			//			Move move = getClick();
+			//			move.piece = 'x';
+			//			tttBoard.addPiece(move);
+			//			turn++;
+			//			player = false;
+			//		}
+			//	}
+			//	if (mode == 2)
+			//	{
+			//		Move move = getClick();
+			//		if (tttBoard.isValidMove(move))
+			//		{
+			//			if (player == true)
+			//			{
+			//				move.piece = 'x';
+			//			}
+			//			else if (player == false)
+			//			{
+			//				move.piece = 'o';
+			//			}
+			//			player = !player;
+			//			tttBoard.addPiece(move);
+			//			turn++;
+			//		}
+			//	}
+			//}
+			//if (mode == 1)
+			//{
+			//	if (player == false)
+			//	{
+			//		Move move = aiP.AIturn(tttBoard);
+			//		tttBoard.addPiece(move);
+			//		turn++;
+			//		player = true;
+			//	}
+			//}
+		}
+		if (mode == 1)
+		{
+			if (player == false)
 			{
-				Move move = getClick();
-				if (player == true)
-				{
-					move.piece = 'x';
-					player = false;
-					turn++;
-				}
-				else if (player == false)
-				{
-					move.piece = 'o';
-					player = true;
-					turn++;
-				}
+				Move move = aiP.AIturn(tttBoard);
 				tttBoard.addPiece(move);
+				turn++;
+				player = true;
+			}
+		}
+		if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+		{
+			Move move = getClick();
+
+			if (mode == 1 && player == true && tttBoard.isValidMove(move))
+			{
+				move.piece = 'x';
+				tttBoard.addPiece(move);
+				turn++;
+				player = false;
+			}
+			if (mode == 2)
+			{
+				if (tttBoard.isValidMove(move))
+				{
+					if (player == true)
+					{
+						move.piece = 'x';
+					}
+					else if (player == false)
+					{
+						move.piece = 'o';
+					}
+					player = !player;
+					tttBoard.addPiece(move);
+					turn++;
+				}
 			}
 		}
 		switch (gameState())
 		{
 		case 1:
 			std::cout << "x wins!" << endl;
-			//text.setString("X wins!");
-			//text.setCharacterSize(50);
-			//window.draw(text);
 			gameRunning = false;
 			break;
 		case 2:
 			std::cout << "o wins!" << endl;
-			//text.setString("O wins!");
-			//text.setCharacterSize(50);
-			//window.draw(text);
 			gameRunning = false;
 			break;
 		case 3:
 			std::cout << "Tie!" << endl;
-			//text.setString("Tie!");
-			//text.setCharacterSize(50);
-			//window.draw(text);
 			gameRunning = false;
 			break;
 		}
@@ -75,16 +131,15 @@ void TicTacToe::drawBoard()
 
 int TicTacToe::gameState()
 {
-	if (tttBS.countAll(tttBoard, 'x') == 3)
-		return 1;
 	if (tttBS.countAll(tttBoard, 'o') == 3)
 		return 2;
+	if (tttBS.countAll(tttBoard, 'x') == 3)
+		return 1;
 	if (turn == 9) //tie
 		return 3;
 	else
 		return 0;
 }
-
 
 void TicTacToe::updateBoard(Board tttBoard) //update tileVec from board
 {
@@ -92,7 +147,7 @@ void TicTacToe::updateBoard(Board tttBoard) //update tileVec from board
 	{
 		for (int j = 0; j < COLS; j++)
 		{
-			tileVec[i][j].setTile(tttBoard.getPiece(i,j));
+			tileVec[i][j].setTile(tttBoard.getPiece(i, j));
 		}
 	}
 }
@@ -107,7 +162,7 @@ Move TicTacToe::getClick()
 		for (int j = 0; j < COLS; j++)
 		{
 			if (tileVec[i][j].getSprite().getGlobalBounds().contains(translated_pos)) //check if sprite contains mouse coords
-			move = { i, j, 'x' };
+				move = { i, j, 'x' };
 		}
 	}
 	return move;
@@ -115,23 +170,33 @@ Move TicTacToe::getClick()
 
 void TicTacToe::init()
 {
+	std::cout << "Enter 1 for single player or 2 for two player: " << endl;
+	char input;
+	std::cin >> input;
+	if (input == '1')
+	{
+		mode = 1;
+	}
+	if (input == '2')
+	{
+		mode = 2;
+	}
+
 	Board tttBoard(3, 3, '\0'); //initialize Board 
 	BoardScorer tttBS; //initialize BoardScorer
+	AI aiP;
 
 	std::cout << "Starting game!" << endl;
-	window.setKeyRepeatEnabled(false);
+	//window.setKeyRepeatEnabled(false);
 	sf::Vector2u winSize = window.getSize();
 	float boxStart = (winSize.x - winSize.y) / 2.f;
-	//std::cout << "boxStart: " << boxStart << std::endl;
 	int spacer = 30;
-	//std::cout << "spacer: " << spacer << std::endl;
 	float boxSize = (winSize.y - (spacer * 2)) / 3.f;
-	//std::cout << "boxSize: " << boxSize << std::endl;
-	
+
 	left.setSize(sf::Vector2f(boxStart, winSize.y));
 	left.setPosition(0, 0);
 	left.setFillColor(sf::Color::White);
-	
+
 	right.setSize(sf::Vector2f(boxStart, winSize.y));
 	right.setPosition(winSize.x - boxStart, 0);
 	right.setFillColor(sf::Color::White);
@@ -155,17 +220,12 @@ void TicTacToe::init()
 		}
 		yPos += (boxSize + spacer);
 	}
+
 	drawBoard();
 }
 
 TicTacToe::TicTacToe()
 	:window(sf::VideoMode(1920, 1080, 32), "Tic Tac Toe")
 {
-	/*if (!font.loadFromFile("ComicRelief.ttf"))
-	{
-		return;
-	}
-	text.setFont(font);*/
-
 	init();
 }

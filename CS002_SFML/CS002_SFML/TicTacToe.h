@@ -3,19 +3,17 @@
 #include "Tile.h"
 #include "Board.h"
 #include "BoardScorer.h"
+#include "AI.h"
 
 class TicTacToe
 {
 protected:
-private:
-	int ROWS = 3, COLS = 3, WIN = 3, turn = 0;
+	int mode = 0, ROWS = 3, COLS = 3, WIN = 3, turn = 0;
 	bool gameRunning = true, player = true;
-
-	sf::Font font;
-	sf::Text text;
 
 	Board tttBoard; //initialize Board 
 	BoardScorer tttBS; //initialize BoardScorer
+	AI aiP; //initialize AI
 
 	std::vector<std::vector<Tile>> tileVec;
 
@@ -25,8 +23,6 @@ private:
 	void drawBoard();
 	void drawTiles();
 
-	//Move playerMove();
-	//Move computerMove();
 	void updateBoard(Board tttBoard);
 	
 	Move getClick();

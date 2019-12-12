@@ -17,8 +17,8 @@ int BoardScorer::countAll(Board board, char piece)
 			max = temp;
 	}
 	temp = countDiagonal(board, 0, 0, piece);
-			if (temp > max)
-				max = temp;
+	if (temp > max)
+		max = temp;
 	temp = countDiagonalAlt(board, 0, 2, piece);
 	if (temp > max)
 		max = temp;
