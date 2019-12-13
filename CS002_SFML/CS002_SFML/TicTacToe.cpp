@@ -21,7 +21,7 @@ void TicTacToe::drawBoard()
 			{
 				window.close();
 			}
-			
+
 			//else if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
 			//{
 			//	if (mode == 1)
@@ -86,22 +86,19 @@ void TicTacToe::drawBoard()
 				turn++;
 				player = false;
 			}
-			if (mode == 2)
+			if (mode == 2 && tttBoard.isValidMove(move))
 			{
-				if (tttBoard.isValidMove(move))
+				if (player == true)
 				{
-					if (player == true)
-					{
-						move.piece = 'x';
-					}
-					else if (player == false)
-					{
-						move.piece = 'o';
-					}
-					player = !player;
-					tttBoard.addPiece(move);
-					turn++;
+					move.piece = 'x';
 				}
+				else if (player == false)
+				{
+					move.piece = 'o';
+				}
+				player = !player;
+				tttBoard.addPiece(move);
+				turn++;
 			}
 		}
 		switch (gameState())
