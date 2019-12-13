@@ -20,7 +20,7 @@ protected:
 	sf::RectangleShape left, right;
 	sf::RenderWindow window;
 
-	void drawBoard();
+	void draw();
 	void drawTiles();
 
 	void updateBoard(Board tttBoard);

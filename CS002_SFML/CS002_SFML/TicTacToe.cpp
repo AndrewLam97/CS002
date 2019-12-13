@@ -1,16 +1,5 @@
 #include "TicTacToe.h"
-void TicTacToe::drawTiles()
-{
-	for (int i = 0; i < tileVec.size(); i++)
-	{
-		for (int j = 0; j < tileVec[i].size(); j++)
-		{
-			window.draw(tileVec[i][j].getSprite());
-		}
-	}
-}
-
-void TicTacToe::drawBoard()
+void TicTacToe::draw()
 {
 	while (window.isOpen() && gameRunning == true)
 	{
@@ -21,49 +10,6 @@ void TicTacToe::drawBoard()
 			{
 				window.close();
 			}
-
-			//else if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
-			//{
-			//	if (mode == 1)
-			//	{
-			//		if (player == true)
-			//		{
-			//			Move move = getClick();
-			//			move.piece = 'x';
-			//			tttBoard.addPiece(move);
-			//			turn++;
-			//			player = false;
-			//		}
-			//	}
-			//	if (mode == 2)
-			//	{
-			//		Move move = getClick();
-			//		if (tttBoard.isValidMove(move))
-			//		{
-			//			if (player == true)
-			//			{
-			//				move.piece = 'x';
-			//			}
-			//			else if (player == false)
-			//			{
-			//				move.piece = 'o';
-			//			}
-			//			player = !player;
-			//			tttBoard.addPiece(move);
-			//			turn++;
-			//		}
-			//	}
-			//}
-			//if (mode == 1)
-			//{
-			//	if (player == false)
-			//	{
-			//		Move move = aiP.AIturn(tttBoard);
-			//		tttBoard.addPiece(move);
-			//		turn++;
-			//		player = true;
-			//	}
-			//}
 		}
 		if (mode == 1)
 		{
@@ -126,6 +72,17 @@ void TicTacToe::drawBoard()
 	}
 }
 
+void TicTacToe::drawTiles()
+{
+	for (int i = 0; i < tileVec.size(); i++)
+	{
+		for (int j = 0; j < tileVec[i].size(); j++)
+		{
+			window.draw(tileVec[i][j].getSprite());
+		}
+	}
+}
+
 int TicTacToe::gameState()
 {
 	if (tttBS.countAll(tttBoard, 'o') == 3)
@@ -184,7 +141,6 @@ void TicTacToe::init()
 	AI aiP;
 
 	std::cout << "Starting game!" << endl;
-	//window.setKeyRepeatEnabled(false);
 	sf::Vector2u winSize = window.getSize();
 	float boxStart = (winSize.x - winSize.y) / 2.f;
 	int spacer = 30;
@@ -217,8 +173,7 @@ void TicTacToe::init()
 		}
 		yPos += (boxSize + spacer);
 	}
-
-	drawBoard();
+	draw();
 }
 
 TicTacToe::TicTacToe()
