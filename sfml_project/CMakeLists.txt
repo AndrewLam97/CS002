@@ -14,7 +14,7 @@ else ()
     add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 endif ()
 
-set(SFML_ROOT C:/SFML-2.5.1)
+set(SFML_ROOT C:/SFML/SFML-2.5.1)
 set(SFML_STATIC_LIBRARIES TRUE)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")

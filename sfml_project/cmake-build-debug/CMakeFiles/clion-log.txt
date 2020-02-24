@@ -6,7 +6,7 @@ CMake Warning (dev) at CMakeLists.txt:22 (find_package):
 
   CMake variable SFML_ROOT is set to:
 
-    C:/SFML-2.5.1
+    C:/SFML/SFML-2.5.1
 
   For compatibility, CMake is ignoring the variable.
 This warning is for project developers.  Use -Wno-dev to suppress it.

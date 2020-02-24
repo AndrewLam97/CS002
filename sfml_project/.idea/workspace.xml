@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3aa7a474-a4fc-4ac4-b7d5-3c02f5a8457a" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,21 +26,14 @@
   </component>
   <component name="ProjectId" id="1URvQ9Mfrpfqd5K2ts0zwhQ5YKb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunManager" selected="CMake Application.sfml_project">
     <configuration name="Debug" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="sfml_project" TARGET_NAME="sfml_project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="sfml_project" RUN_TARGET_NAME="sfml_project">
@@ -72,6 +64,9 @@
       <workItem from="1575332205754" duration="101000" />
       <workItem from="1575332428946" duration="237000" />
       <workItem from="1575333241273" duration="316000" />
+      <workItem from="1582047735706" duration="365000" />
+      <workItem from="1582049148264" duration="721000" />
+      <workItem from="1582241017494" duration="254000" />
     </task>
     <servers />
   </component>
@@ -90,5 +85,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="791" y="338" key="FileChooserDialogImpl" timestamp="1582241257495">
+      <screen x="0" y="0" width="2133" height="1200" />
+    </state>
+    <state x="791" y="338" key="FileChooserDialogImpl/0.0.2133.1200@0.0.2133.1200" timestamp="1582241257495" />
+    <state x="762" y="424" key="com.intellij.ide.util.TipDialog" timestamp="1582241033348">
+      <screen x="0" y="0" width="2133" height="1200" />
+    </state>
+    <state x="762" y="424" key="com.intellij.ide.util.TipDialog/0.0.2133.1200@0.0.2133.1200" timestamp="1582241033348" />
   </component>
 </project>
